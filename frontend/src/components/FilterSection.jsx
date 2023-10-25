@@ -1,9 +1,32 @@
+import { useState, useEffect } from "react";
 import axios from "axios";
 import "../sass/_filterSection.scss";
-import { useState } from "react";
 
 function FilterSection() {
   const [filterCriteriaButton, setFilterCriteriaButton] = useState(0);
+  const [dataCountry, setDataCountry] = useState([]);
+  const [dataTag, setDataTag] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://de1.api.radio-browser.info/json/countries?order=name")
+      .then((response) => {
+        setDataCountry(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+      });
+  });
+  useEffect(() => {
+    axios
+      .get("https://de1.api.radio-browser.info/json/tags?order=name")
+      .then((response) => {
+        setDataTag(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+      });
+  });
 
   function makeFilterSectionDisappear() {
     const filterSection = document.querySelector(".filter-section");
@@ -31,7 +54,7 @@ function FilterSection() {
     const filterSection = document.querySelector(".filter-section");
     const options = document.querySelectorAll(".option");
     options.forEach((option) => {
-      option.addEventListener("click", () => {
+      option.addEventListener("mousedown", () => {
         options.forEach((oneOption) => {
           oneOption.classList.remove("is-active");
         });
@@ -66,55 +89,29 @@ function FilterSection() {
           Country
         </button>
       </div>
-      {filterCriteriaButton ? (
-        <div className="options">
-          <button
-            onClick={toggleOptionActiveState}
-            type="button"
-            className="option is-active"
-          >
-            {console.info(() =>
-              axios
-                .get(
-                  "https://de1.api.radio-browser.info/json/countries?order=name"
-                )
-                .then((response) => response.data[0].name)
-                .catch((error) => console.error(error))
-            )}
-          </button>
-        </div>
-      ) : (
-        <div className="options">
-          <button
-            onClick={toggleOptionActiveState}
-            type="button"
-            className="option is-active"
-          >
-            Casual
-          </button>
-          <button
-            onClick={toggleOptionActiveState}
-            type="button"
-            className="option"
-          >
-            Business
-          </button>
-          <button
-            onClick={toggleOptionActiveState}
-            type="button"
-            className="option"
-          >
-            Formal
-          </button>
-          <button
-            onClick={toggleOptionActiveState}
-            type="button"
-            className="option"
-          >
-            Party
-          </button>
-        </div>
-      )}
+      {filterCriteriaButton
+        ? dataCountry.map((country) => (
+            <div className="options">
+              <button
+                onClick={toggleOptionActiveState}
+                type="button"
+                className="option"
+              >
+                <p key={country.name}>{country.name}</p>
+              </button>
+            </div>
+          ))
+        : dataTag.map((tag) => (
+            <div className="options">
+              <button
+                onClick={toggleOptionActiveState}
+                type="button"
+                className="option"
+              >
+                <p key={tag.name}>{tag.name}</p>
+              </button>
+            </div>
+          ))}
     </div>
   );
 }
