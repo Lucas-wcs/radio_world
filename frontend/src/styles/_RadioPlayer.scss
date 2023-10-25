@@ -1,0 +1,30 @@
+.container-global {
+  width: 70vw;
+  height: 70vh;
+  border: 1px solid red;
+  background-image: url("/radio.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+
+  //css bouttons
+  .container-button {
+    display: flex;
+    justify-content: center;
+    border: 1px solid red;
+    height: 70vh;
+    align-items: flex-start;
+    width: 70vw;
+
+    img {
+      width: 80px;
+
+      padding: 5px;
+      cursor: pointer;
+    }
+    img:hover {
+      transform: scale(1.1);
+    }
+  }
+}
