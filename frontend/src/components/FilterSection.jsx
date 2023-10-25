@@ -1,12 +1,16 @@
+import axios from "axios";
 import "../sass/_filterSection.scss";
+import { useState } from "react";
 
 function FilterSection() {
+  const [filterCriteriaButton, setFilterCriteriaButton] = useState(0);
+
   function makeFilterSectionDisappear() {
     const filterSection = document.querySelector(".filter-section");
     filterSection.style.display = "none";
   }
 
-  function toggleFilterCriteriaActiveState() {
+  function handleFilterCriteriaActiveState() {
     const filterCriteria = document.querySelectorAll(".filter-criteria");
     filterCriteria.forEach((criteria) => {
       criteria.addEventListener("click", () => {
@@ -15,6 +19,11 @@ function FilterSection() {
         });
         criteria.classList.add("is-active");
       });
+      if (criteria.classList.contains("is-active")) {
+        setFilterCriteriaButton(1);
+      } else {
+        setFilterCriteriaButton(0);
+      }
     });
   }
 
@@ -43,64 +52,69 @@ function FilterSection() {
       </button>
       <div className="filter-criteria-wrapper">
         <button
-          onClick={toggleFilterCriteriaActiveState}
+          onClick={handleFilterCriteriaActiveState}
           type="button"
           className="filter-criteria is-active"
         >
-          <p className="criteria-item">Country</p>
+          Style
         </button>
         <button
-          onClick={toggleFilterCriteriaActiveState}
+          onClick={handleFilterCriteriaActiveState}
           type="button"
           className="filter-criteria"
         >
-          <p className="criteria-item">Style</p>
+          Country
         </button>
       </div>
-      <div className="options">
-        <button
-          onClick={toggleOptionActiveState}
-          type="button"
-          className="option is-active"
-        >
-          India
-        </button>
-        <button
-          onClick={toggleOptionActiveState}
-          type="button"
-          className="option"
-        >
-          China
-        </button>
-        <button
-          onClick={toggleOptionActiveState}
-          type="button"
-          className="option"
-        >
-          Japan
-        </button>
-        <button
-          onClick={toggleOptionActiveState}
-          type="button"
-          className="option"
-        >
-          Korea
-        </button>
-        <button
-          onClick={toggleOptionActiveState}
-          type="button"
-          className="option"
-        >
-          Thailand
-        </button>
-        <button
-          onClick={toggleOptionActiveState}
-          type="button"
-          className="option"
-        >
-          Vietnam
-        </button>
-      </div>
+      {filterCriteriaButton ? (
+        <div className="options">
+          <button
+            onClick={toggleOptionActiveState}
+            type="button"
+            className="option is-active"
+          >
+            {console.info(() =>
+              axios
+                .get(
+                  "https://de1.api.radio-browser.info/json/countries?order=name"
+                )
+                .then((response) => response.data[0].name)
+                .catch((error) => console.error(error))
+            )}
+          </button>
+        </div>
+      ) : (
+        <div className="options">
+          <button
+            onClick={toggleOptionActiveState}
+            type="button"
+            className="option is-active"
+          >
+            Casual
+          </button>
+          <button
+            onClick={toggleOptionActiveState}
+            type="button"
+            className="option"
+          >
+            Business
+          </button>
+          <button
+            onClick={toggleOptionActiveState}
+            type="button"
+            className="option"
+          >
+            Formal
+          </button>
+          <button
+            onClick={toggleOptionActiveState}
+            type="button"
+            className="option"
+          >
+            Party
+          </button>
+        </div>
+      )}
     </div>
   );
 }
