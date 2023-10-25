@@ -1,14 +1,21 @@
 import "../sass/_filterButton.scss";
 
-const FilterButton = () => {
+function FilterButton() {
+  function makeFilterSectionAppear() {
+    const filterSection = document.querySelector(".filter-section");
+    filterSection.style.display = "flex";
+  }
+
   return (
-    <button className="filter-button">
+    <button
+      onClick={makeFilterSectionAppear}
+      type="button"
+      className="filter-button"
+    >
       Filter
-      <span className="icon-container">
-        <img src="/src/assets/filterIcon.png" />
-      </span>
+      <img src="/src/assets/filterIcon.png" alt="Filter icon" />
     </button>
   );
-};
+}
 
 export default FilterButton;
