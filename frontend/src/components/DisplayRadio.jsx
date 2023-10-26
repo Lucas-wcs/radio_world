@@ -1,40 +1,6 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import PropTypes from "prop-types";
 
-function DisplayRadio() {
-  const [radiosRandom, setRadiosRandom] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("https://de1.api.radio-browser.info/json/stations?limit=100")
-      .then((res) => {
-        const tabRadios = [];
-        for (let i = 0; i < 8; i += 1) {
-          const randomRadio =
-            res.data[Math.floor(Math.random() * res.data.length)];
-          if (
-            randomRadio.favicon !== "" &&
-            randomRadio.name !== "" &&
-            randomRadio.stationuuid !== "" &&
-            randomRadio.tags !== "" &&
-            randomRadio.country !== ""
-          ) {
-            const verifUUID = randomRadio.stationuuid;
-            if (
-              !tabRadios.find(({ stationuuid }) => stationuuid === verifUUID)
-            ) {
-              tabRadios.push(randomRadio);
-            } else {
-              i -= 1;
-            }
-          } else {
-            i -= 1;
-          }
-          setRadiosRandom(tabRadios);
-        }
-      });
-  }, []);
-
+function DisplayRadio({ radiosRandom }) {
   return (
     <div className="display_radios">
       {radiosRandom &&
@@ -49,5 +15,15 @@ function DisplayRadio() {
     </div>
   );
 }
+
+DisplayRadio.propTypes = {
+  radiosRandom: PropTypes.arrayOf(
+    PropTypes.shape({
+      stationuuid: PropTypes.string.isRequired,
+      favicon: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
 
 export default DisplayRadio;

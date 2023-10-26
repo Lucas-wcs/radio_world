@@ -1,57 +1,14 @@
-import React, { useState, useEffect } from "react";
-
-/* Mettre modale pour faire apparaitre radio */
-
-const stations = [
-  { name: "Station 1", source: "http://stream.bestfm.sk/128.mp3" },
-  { name: "Station 2", source: "http://stream.funradio.sk:8000/fun128.mp3" },
-  { name: "Station 3", source: "https://ais-sa2.cdnstream1.com/2447_192.mp3" },
-];
-
 /* Function pour faire fonctionner la radio (play,pause, next,previous) */
+import PropTypes from "prop-types";
 
-function RadioPlayer() {
-  const [audioPlaying, setAudioPlaying] = useState(false);
-  const [currentStationIndex, setCurrentStationIndex] = useState(0);
-
-  const toggleAudio = () => {
-    setAudioPlaying(!audioPlaying);
-  };
-
-  /* station suivante */
-
-  const playNextStation = () => {
-    if (currentStationIndex < stations.length - 1) {
-      setCurrentStationIndex(currentStationIndex + 1);
-    } else {
-      setCurrentStationIndex(0);
-    }
-    setAudioPlaying(true);
-  };
-
-  /* station précédente */
-
-  const playPreviousStation = () => {
-    if (currentStationIndex > 0) {
-      setCurrentStationIndex(currentStationIndex - 1);
-    } else {
-      setCurrentStationIndex(stations.length - 1);
-    }
-    setAudioPlaying(true);
-  };
-
-  /* Play-pause */
-
-  useEffect(() => {
-    const audioElement = document.getElementById("audioPlayer");
-    if (audioElement) {
-      audioElement.src = stations[currentStationIndex].source;
-      if (audioPlaying) {
-        audioElement.play();
-      }
-    }
-  }, [currentStationIndex, audioPlaying]);
-
+function RadioPlayer({
+  stations,
+  audioPlaying,
+  currentStationIndex,
+  toggleAudio,
+  playNextStation,
+  playPreviousStation,
+}) {
   return (
     <div className="container-radio">
       <div className="container-global">
@@ -87,7 +44,7 @@ function RadioPlayer() {
       {/* Lecteur audio caché */}
       <audio
         id="audioPlayer"
-        src={stations[currentStationIndex].source}
+        src={stations[currentStationIndex].url}
         autoPlay={audioPlaying}
         style={{ display: "none" }}
       >
@@ -96,5 +53,16 @@ function RadioPlayer() {
     </div>
   );
 }
+
+RadioPlayer.propTypes = {
+  stations: PropTypes.arrayOf(
+    PropTypes.shape({ url: PropTypes.string.isRequired })
+  ).isRequired,
+  audioPlaying: PropTypes.bool.isRequired,
+  currentStationIndex: PropTypes.number.isRequired,
+  toggleAudio: PropTypes.func.isRequired,
+  playNextStation: PropTypes.func.isRequired,
+  playPreviousStation: PropTypes.func.isRequired,
+};
 
 export default RadioPlayer;
