@@ -5,35 +5,41 @@ function DisplayRadio() {
   const [radiosRandom, setRadiosRandom] = useState([]);
 
   useEffect(() => {
-    console.info("hello");
     axios
       .get("https://de1.api.radio-browser.info/json/stations?limit=100")
       .then((res) => {
-        if (
-          res.data.favicon !== "" &&
-          res.data.name !== "" &&
-          res.data.serveruuid !== "" &&
-          res.data.tags !== "" &&
-          res.data.country !== ""
-        ) {
-          const randomRadios = [];
-          for (let i = 0; i < 8; i += 1) {
-            randomRadios.push(
-              res.data[Math.floor(Math.random() * res.data.length)]
-            );
+        const tabRadios = [];
+        for (let i = 0; i < 8; i += 1) {
+          const randomRadio =
+            res.data[Math.floor(Math.random() * res.data.length)];
+          if (
+            randomRadio.favicon !== "" &&
+            randomRadio.name !== "" &&
+            randomRadio.stationuuid !== ""
+          ) {
+            const verifUUID = randomRadio.stationuuid;
+            if (
+              !tabRadios.find(({ stationuuid }) => stationuuid === verifUUID)
+            ) {
+              tabRadios.push(randomRadio);
+            } else {
+              i -= 1;
+            }
+          } else {
+            i -= 1;
           }
-          setRadiosRandom(randomRadios);
+          setRadiosRandom(tabRadios);
         }
       });
   }, []);
 
   return (
-    <div className="display_radio">
+    <div className="display_radios">
       {radiosRandom &&
         radiosRandom.map((station) => {
           return (
-            <div key={station.stationuuid}>
-              <img src={station.favicon} alt="favicon" />
+            <div key={station.stationuuid} className="radio">
+              <img src={station.favicon} alt="favicon" className="favicon" />
               <p>{station.name}</p>
             </div>
           );
