@@ -1,0 +1,35 @@
+.navbar {
+  display: flex;
+  height: 13vh;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #c34e3a;
+  box-shadow: 0px 8px 1px rgba(0, 0, 0, 0.232);
+
+  .favoriteButton {
+    height: 50%;
+  }
+
+  .logoRW {
+    max-height: 100%;
+  }
+
+  .logoRS {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .logoRS1 {
+      height: 50%;
+    }
+
+    .logoRS2 {
+      height: 50%;
+    }
+
+    img {
+      height: 100%;
+      width: 50%;
+    }
+  }
+}
