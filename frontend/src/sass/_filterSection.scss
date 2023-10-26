@@ -115,8 +115,7 @@
     }
 
     .is-active {
-      background-color: var(--neutral-color);
-      color: var(--secondary-color);
+      background-color: inherit;
     }
   }
 }

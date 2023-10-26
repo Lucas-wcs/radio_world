@@ -1,0 +1,8 @@
+.search-bar__input {
+    flex: 1;
+    display:flex;
+    padding: .5rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid var(--secondary-color);
+    height: 100%;
+}
