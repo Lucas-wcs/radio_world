@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+/* Mettre modale pour faire apparaitre radio */
+
 const stations = [
   { name: "Station 1", source: "http://stream.bestfm.sk/128.mp3" },
   { name: "Station 2", source: "http://stream.funradio.sk:8000/fun128.mp3" },
@@ -51,7 +53,7 @@ function RadioPlayer() {
   }, [currentStationIndex, audioPlaying]);
 
   return (
-    <div>
+    <div className="container-radio">
       <div className="container-global">
         <div className="container-button">
           <div
@@ -76,6 +78,10 @@ function RadioPlayer() {
           >
             <img src="/suivant.png" alt="suivant" />
           </div>
+          {/* <div
+            className="btn" onclick={() => closeModal(false)}>
+            X
+          </div> */}
         </div>
       </div>
       {/* Lecteur audio caché */}
