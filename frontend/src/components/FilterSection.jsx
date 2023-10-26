@@ -1,32 +1,35 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { getCountryData } from "../services/countryData";
+import { getStyleData } from "../services/styleData";
 import "../sass/_filterSection.scss";
 
 function FilterSection() {
   const [filterCriteriaButton, setFilterCriteriaButton] = useState(0);
   const [dataCountry, setDataCountry] = useState([]);
-  const [dataTag, setDataTag] = useState([]);
+  const [dataStyle, setDataStyle] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("https://de1.api.radio-browser.info/json/countries?order=name")
-      .then((response) => {
-        setDataCountry(response.data);
-      })
-      .catch((error) => {
+    const loadCountryData = async () => {
+      try {
+        const countries = await getCountryData();
+        setDataCountry(countries);
+      } catch (error) {
         console.error("Error fetching data: ", error);
-      });
-  });
+      }
+    };
+    loadCountryData();
+  }, []);
   useEffect(() => {
-    axios
-      .get("https://de1.api.radio-browser.info/json/tags?order=name")
-      .then((response) => {
-        setDataTag(response.data);
-      })
-      .catch((error) => {
+    const loadStyleData = async () => {
+      try {
+        const countries = await getStyleData();
+        setDataStyle(countries);
+      } catch (error) {
         console.error("Error fetching data: ", error);
-      });
-  });
+      }
+    };
+    loadStyleData();
+  }, []);
 
   function makeFilterSectionDisappear() {
     const filterSection = document.querySelector(".filter-section");
@@ -101,7 +104,7 @@ function FilterSection() {
               </button>
             </div>
           ))
-        : dataTag.map((tag) => (
+        : dataStyle.map((tag) => (
             <div className="options">
               <button
                 onClick={toggleOptionActiveState}
