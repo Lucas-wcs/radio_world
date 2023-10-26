@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import DisplayRadio from "./components/DisplayRadio";
 import RadioPlayer from "./components/RadioPlayer";
 import "./sass/_app.scss";
+import "./styles/_settings.scss";
 
 function App() {
   const [radiosRandom, setRadiosRandom] = useState([]);
