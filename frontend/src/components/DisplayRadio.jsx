@@ -15,7 +15,9 @@ function DisplayRadio() {
           if (
             randomRadio.favicon !== "" &&
             randomRadio.name !== "" &&
-            randomRadio.stationuuid !== ""
+            randomRadio.stationuuid !== "" &&
+            randomRadio.tags !== "" &&
+            randomRadio.country !== ""
           ) {
             const verifUUID = randomRadio.stationuuid;
             if (
