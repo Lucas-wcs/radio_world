@@ -1,45 +1,54 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import SearchBar from "./SearchBar";
 
-function DisplayRadio() {
-  const [radiosRandom, setRadiosRandom] = useState([]);
-
-  useEffect(() => {
-    console.info("hello");
-    axios
-      .get("https://de1.api.radio-browser.info/json/stations?limit=100")
-      .then((res) => {
-        if (
-          res.data.favicon !== "" &&
-          res.data.name !== "" &&
-          res.data.serveruuid !== "" &&
-          res.data.tags !== "" &&
-          res.data.country !== ""
-        ) {
-          const randomRadios = [];
-          for (let i = 0; i < 8; i += 1) {
-            randomRadios.push(
-              res.data[Math.floor(Math.random() * res.data.length)]
-            );
-          }
-          setRadiosRandom(randomRadios);
-        }
-      });
-  }, []);
+function DisplayRadio({ radiosRandom }) {
+  const [searchValue, setSearchValue] = useState("");
 
   return (
-    <div className="display_radio">
-      {radiosRandom &&
-        radiosRandom.map((station) => {
-          return (
-            <div key={station.stationuuid}>
-              <img src={station.favicon} alt="favicon" />
-              <p>{station.name}</p>
-            </div>
-          );
-        })}
+    <div className="container-display-radio">
+      <div className="search-feature">
+        <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
+      </div>
+      <div className="display_radios">
+        {radiosRandom &&
+          radiosRandom
+            .filter((radio) =>
+              radio.name.toLowerCase().includes(searchValue.toLowerCase())
+            )
+            .map((station) => {
+              return (
+                <div className="space4">
+                  <div className="rond">
+                    <button
+                      type="button"
+                      key={station.stationuuid}
+                      className="radio"
+                    >
+                      <img
+                        src={station.favicon}
+                        alt="favicon"
+                        className="favicon"
+                      />
+                      <p>{station.name}</p>
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+      </div>
     </div>
   );
 }
+
+DisplayRadio.propTypes = {
+  radiosRandom: PropTypes.arrayOf(
+    PropTypes.shape({
+      stationuuid: PropTypes.string.isRequired,
+      favicon: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
 
 export default DisplayRadio;
