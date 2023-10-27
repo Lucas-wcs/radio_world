@@ -1,25 +1,29 @@
+:root {
+  // TODO: define global font family
+  // TODO: define global font size
+  // TODO: define global spacing
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html,
-body,
-:root {
-  min-height: 100vh;
-}
-
 body {
   background-image: url("src/images/fond_radio_2.png");
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   display: flex;
+  min-height: 100vh;
+  max-width: 100vw;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 .main {
   display: flex;
   flex-direction: column;
-  height: 100vh;
 }

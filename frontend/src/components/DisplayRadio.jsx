@@ -1,13 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import SearchBar from "./SearchBar";
-import "../styles/_DisplayRadio.scss";
 
 function DisplayRadio({ radiosRandom }) {
   const [searchValue, setSearchValue] = useState("");
 
   return (
-    <>
+    <div className="container-display-radio">
       <div className="search-feature">
         <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
@@ -19,18 +18,26 @@ function DisplayRadio({ radiosRandom }) {
             )
             .map((station) => {
               return (
-                <div key={station.stationuuid} className="radio">
-                  <img
-                    src={station.favicon}
-                    alt="favicon"
-                    className="favicon"
-                  />
-                  <p>{station.name}</p>
+                <div className="space4">
+                  <div className="rond">
+                    <button
+                      type="button"
+                      key={station.stationuuid}
+                      className="radio"
+                    >
+                      <img
+                        src={station.favicon}
+                        alt="favicon"
+                        className="favicon"
+                      />
+                      <p>{station.name}</p>
+                    </button>
+                  </div>
                 </div>
               );
             })}
       </div>
-    </>
+    </div>
   );
 }
 

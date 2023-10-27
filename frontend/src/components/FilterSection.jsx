@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "../sass/_filterSection.scss";
 
 function FilterSection() {
   const [filterCriteriaButton, setFilterCriteriaButton] = useState(0);
