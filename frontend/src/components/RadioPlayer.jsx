@@ -1,6 +1,6 @@
 /* Function pour faire fonctionner la radio (play,pause, next,previous) */
 import PropTypes from "prop-types";
-import "../styles/_RadioPlayer.scss";
+import React from "react";
 
 function RadioPlayer({
   stations,

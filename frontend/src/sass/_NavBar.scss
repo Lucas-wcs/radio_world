@@ -5,6 +5,7 @@
   align-items: center;
   background-color: #c34e3a;
   box-shadow: 0px 8px 1px rgba(0, 0, 0, 0.232);
+  margin-bottom: 80px;
 
   .favoriteButton {
     height: 50%;
@@ -15,9 +16,8 @@
   }
 
   .logoRS {
-    display: flex;
-    flex-direction: column;
     height: 100%;
+    border: 1px solid red;
 
     .logoRS1 {
       height: 50%;

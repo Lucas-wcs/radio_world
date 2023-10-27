@@ -4,8 +4,6 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import DisplayRadio from "./components/DisplayRadio";
 import RadioPlayer from "./components/RadioPlayer";
-import "./sass/_app.scss";
-import "./styles/_settings.scss";
 
 function App() {
   const [radiosRandom, setRadiosRandom] = useState([]);
@@ -17,7 +15,7 @@ function App() {
       .get("https://de1.api.radio-browser.info/json/stations?limit=100")
       .then((res) => {
         const tabRadios = [];
-        for (let i = 0; i < 8; i += 1) {
+        for (let i = 0; i < 16; i += 1) {
           const randomRadio =
             res.data[Math.floor(Math.random() * res.data.length)];
           if (
