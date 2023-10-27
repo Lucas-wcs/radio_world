@@ -1,4 +1,4 @@
-import React from "react";
+import "../styles/_NavBar.scss";
 
 function NavBar() {
   return (
@@ -8,12 +8,11 @@ function NavBar() {
         className="logoRW"
         alt="Radio World logo"
       />
-      <div className="filters">Filtres Ange</div>
-      <img
+      {/* <img
         src="src/images/heart.png"
         className="favoriteButton"
         alt="favoriteButton"
-      />
+      /> */}
       <div className="logoRS">
         <div className="logoRS1">
           <img src="src/images/twitter.png" alt="Twitter logo" />

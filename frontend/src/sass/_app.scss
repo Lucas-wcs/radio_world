@@ -1,0 +1,22 @@
+:root {
+  --secondary-color: hsla(165, 30%, 40%, 0.9);
+  --secondary-color-fade-1: hsl(165, 30%, 40%);
+  --neutral-color: hsl(0, 0%, 100%);
+  font-size: 10px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+.search-feature {
+  display: flex;
+  gap: 1em;
+  height: 3.5rem;
+}
