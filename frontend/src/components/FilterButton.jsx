@@ -1,5 +1,3 @@
-import "../sass/_filterButton.scss";
-
 function FilterButton() {
   function makeFilterSectionAppear() {
     const filterSection = document.querySelector(".filter-section");

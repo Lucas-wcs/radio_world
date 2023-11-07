@@ -1,0 +1,73 @@
+.container-display-radio {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.display_radios {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  align-items: center;
+  justify-content: space-around;
+  gap: 30px;
+  margin-bottom: 100px;
+
+  .space4 {
+    flex: 1 21%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .radio {
+    background-color: #fae7a7a5;
+    width: 200px;
+    height: 200px;
+    border: 1px solid rgba(0, 0, 0, 0.93);
+    border-radius: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(3px);
+    box-shadow:
+      6px 6px 12px #fae7a75b,
+      -6px -6px 12px #fae7a75b;
+  }
+  button:active {
+    color: #666;
+    box-shadow:
+      inset 4px 4px 12px #fae7a75b,
+      inset -4px -4px 12px #fae7a75b;
+  }
+
+  .rond {
+    width: 220px;
+    height: 220px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 220px;
+    p {
+      font-family: "Montserrat", sans-serif;
+      font-weight: bold;
+      width: 80%;
+      text-align: center;
+      word-wrap: break-word;
+      font-size: 14px;
+    }
+
+    .favicon {
+      width: 70px;
+    }
+  }
+}
+
+.search-feature {
+  position: absolute;
+  top: 3%;
+  left: 50%;
+  transform: translateX(-50%);
+}

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { getCountryData } from "../services/countryData";
-import { getStyleData } from "../services/styleData";
-import "../sass/_filterSection.scss";
+import axios from "axios";
+// TODO: refactor to use the API from an external file
+// import { getCountryData } from "../services/countryData";
+// import { getStyleData } from "../services/styleData";
 
 function FilterSection() {
   const [filterCriteriaButton, setFilterCriteriaButton] = useState(0);
@@ -9,26 +10,20 @@ function FilterSection() {
   const [dataStyle, setDataStyle] = useState([]);
 
   useEffect(() => {
-    const loadCountryData = async () => {
-      try {
-        const countries = await getCountryData();
-        setDataCountry(countries);
-      } catch (error) {
-        console.error("Error fetching data: ", error);
-      }
-    };
-    loadCountryData();
+    axios
+      .get("https://de1.api.radio-browser.info/json/countries?order=name")
+      .then((response) => {
+        setDataCountry(response.data);
+      })
+      .catch((error) => console.error("Error fetching data: ", error));
   }, []);
   useEffect(() => {
-    const loadStyleData = async () => {
-      try {
-        const countries = await getStyleData();
-        setDataStyle(countries);
-      } catch (error) {
-        console.error("Error fetching data: ", error);
-      }
-    };
-    loadStyleData();
+    axios
+      .get("https://de1.api.radio-browser.info/json/tags?order=stationcount")
+      .then((response) => {
+        setDataStyle(response.data);
+      })
+      .catch((error) => console.error("Error fetching data: ", error));
   }, []);
 
   function makeFilterSectionDisappear() {
