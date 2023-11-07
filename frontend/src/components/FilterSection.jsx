@@ -87,29 +87,38 @@ function FilterSection() {
           Country
         </button>
       </div>
-      {filterCriteriaButton
-        ? dataCountry.map((country) => (
-            <div className="options">
-              <button
-                onClick={toggleOptionActiveState}
-                type="button"
-                className="option"
-              >
-                <p key={country.name}>{country.name}</p>
-              </button>
-            </div>
-          ))
-        : dataStyle.map((tag) => (
-            <div className="options">
-              <button
-                onClick={toggleOptionActiveState}
-                type="button"
-                className="option"
-              >
-                <p key={tag.name}>{tag.name}</p>
-              </button>
-            </div>
-          ))}
+      <div className="filter-section-search-bar">
+        <input
+          type="search"
+          name="filter-section-search-bar"
+          placeholder="Search for criteria"
+        />
+      </div>
+      <div className="filter-options-wrapper">
+        {filterCriteriaButton
+          ? dataCountry.map((country) => (
+              <div className="options">
+                <button
+                  onClick={toggleOptionActiveState}
+                  type="button"
+                  className="option"
+                >
+                  <p key={country.name}>{country.name}</p>
+                </button>
+              </div>
+            ))
+          : dataStyle.map((tag) => (
+              <div className="options">
+                <button
+                  onClick={toggleOptionActiveState}
+                  type="button"
+                  className="option"
+                >
+                  <p key={tag.name}>{tag.name}</p>
+                </button>
+              </div>
+            ))}
+      </div>
     </div>
   );
 }

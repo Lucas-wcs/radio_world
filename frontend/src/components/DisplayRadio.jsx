@@ -1,6 +1,8 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import SearchBar from "./SearchBar";
+import FilterButton from "./FilterButton";
+import FilterSection from "./FilterSection";
 
 function DisplayRadio({ radiosRandom }) {
   const [searchValue, setSearchValue] = useState("");
@@ -8,7 +10,9 @@ function DisplayRadio({ radiosRandom }) {
     <div className="container-display-radio">
       <div className="search-feature">
         <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
+        <FilterButton />
       </div>
+      <FilterSection />
       <div className="display_radios">
         {radiosRandom &&
           radiosRandom
