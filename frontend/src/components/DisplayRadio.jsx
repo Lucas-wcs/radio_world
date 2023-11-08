@@ -12,7 +12,8 @@ function DisplayRadio({
   playNextStation,
   playPreviousStation,
   currentStationIndex,
-  setCurrentStationIndex
+  setCurrentStationIndex,
+  isLoading
 }) {
   const [searchValue, setSearchValue] = useState("");
   const [openModal, setOpenModal] = useState(false);
@@ -22,7 +23,7 @@ function DisplayRadio({
       <div className="search-feature">
         <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
-      <div className="display_radios">
+      <div className={`display_radios ${!isLoading ? "loaded" : ""}`}>
         {radiosRandom &&
           radiosRandom
             .filter((radio) =>
