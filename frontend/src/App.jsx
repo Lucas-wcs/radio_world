@@ -25,9 +25,11 @@ function App() {
             randomRadio.tags !== "" &&
             randomRadio.country !== ""
           ) {
+            const verifName = randomRadio.name;
             const verifUUID = randomRadio.stationuuid;
             if (
-              !tabRadios.find(({ stationuuid }) => stationuuid === verifUUID)
+              !tabRadios.find(({ stationuuid }) => stationuuid === verifUUID) &&
+              !tabRadios.find(({ name }) => name === verifName)
             ) {
               tabRadios.push(randomRadio);
             } else {
@@ -75,7 +77,7 @@ function App() {
     const audioElement = document.getElementById("audioPlayer");
     if (audioElement) {
       audioElement.src = radiosRandom[currentStationIndex].url;
-      console.warn("currentStationIndex : ", currentStationIndex);
+      
 
       audioElement.addEventListener("canplay", () => {
         if (audioPlaying) {
