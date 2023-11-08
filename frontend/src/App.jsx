@@ -44,8 +44,6 @@ function App() {
     setAudioPlaying(!audioPlaying);
   };
 
-  /* station suivante */
-
   const playNextStation = () => {
     if (currentStationIndex < radiosRandom.length - 1) {
       setCurrentStationIndex(currentStationIndex + 1);
@@ -54,8 +52,6 @@ function App() {
     }
     setAudioPlaying(true);
   };
-
-  /* station précédente */
 
   const playPreviousStation = () => {
     if (currentStationIndex > 0) {
@@ -66,13 +62,12 @@ function App() {
     setAudioPlaying(true);
   };
 
-  /* Play-pause */
 
   useEffect(() => {
     const audioElement = document.getElementById("audioPlayer");
     if (audioElement) {
       audioElement.src = radiosRandom[currentStationIndex].url;
-      console.warn("currentStationIndex : ", currentStationIndex);
+      
 
       audioElement.addEventListener("canplay", () => {
         if (audioPlaying) {
@@ -94,6 +89,7 @@ function App() {
         currentStationIndex={currentStationIndex}
         playPreviousStation={playPreviousStation}
         playNextStation={playNextStation}
+        setCurrentStationIndex={setCurrentStationIndex}
       />
       <Footer />
     </div>

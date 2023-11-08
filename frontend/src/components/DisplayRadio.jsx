@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import SearchBar from "./SearchBar";
+import { createPortal } from "react-dom";
 import RadioPlayer from "./RadioPlayer";
+
 
 function DisplayRadio({
   radiosRandom,
@@ -10,6 +12,7 @@ function DisplayRadio({
   playNextStation,
   playPreviousStation,
   currentStationIndex,
+  setCurrentStationIndex
 }) {
   const [searchValue, setSearchValue] = useState("");
   const [openModal, setOpenModal] = useState(false);
@@ -25,13 +28,14 @@ function DisplayRadio({
             .filter((radio) =>
               radio.name.toLowerCase().includes(searchValue.toLowerCase())
             )
-            .map((station) => {
+            .map((station, currentStationIndex) => {
               return (
                 <div className="space4" key={station.stationuuid}>
                   <div className="rond">
                     <button
                       onClick={() => {
                         setOpenModal(true);
+                        setCurrentStationIndex(currentStationIndex);
                       }}
                       type="button"
                       className="radio"
@@ -60,7 +64,10 @@ function DisplayRadio({
         />
       )}
     </div>
+   
   );
+
+
 }
 
 DisplayRadio.propTypes = {
