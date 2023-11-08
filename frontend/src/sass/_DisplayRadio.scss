@@ -1,11 +1,4 @@
-.main-radio-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  opacity: 0;
-}
-
-.main-radio-container.loaded {
+.display_radios.loaded {
   opacity: 1;
   transition: opacity 1s;
   overflow: auto;  
@@ -18,17 +11,17 @@
   }
 }
 
-.main-radio-container.loaded::-webkit-scrollbar-track
+.display_radios.loaded::-webkit-scrollbar-track
 {
 	border-radius: 10px;
 }
 
-.main-radio-container.loaded::-webkit-scrollbar
+.display_radios.loaded::-webkit-scrollbar
 {
 	width: 15px;
 }
 
-.main-radio-container.loaded::-webkit-scrollbar-thumb
+.display_radios.loaded::-webkit-scrollbar-thumb
 {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
@@ -42,6 +35,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
+  opacity: 0;
  
   .space4 {
     width: 20%;
