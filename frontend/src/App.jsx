@@ -8,6 +8,7 @@ function App() {
   const [radiosRandom, setRadiosRandom] = useState([]);
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [currentStationIndex, setCurrentStationIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -37,8 +38,16 @@ function App() {
           } else {
             i -= 1;
           }
-          setRadiosRandom(tabRadios);
         }
+        setRadiosRandom(tabRadios);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error(
+          "Erreur lors de la récupération des données de l'API.",
+          error
+        );
+        setIsLoading(false);
       });
   }, []);
 
@@ -64,7 +73,6 @@ function App() {
     setAudioPlaying(true);
   };
 
-
   useEffect(() => {
     const audioElement = document.getElementById("audioPlayer");
     if (audioElement) {
@@ -84,15 +92,25 @@ function App() {
   return (
     <div className="main">
       <NavBar />
-      <DisplayRadio
-        radiosRandom={radiosRandom}
-        toggleAudio={toggleAudio}
-        audioPlaying={audioPlaying}
-        currentStationIndex={currentStationIndex}
-        playPreviousStation={playPreviousStation}
-        playNextStation={playNextStation}
-        setCurrentStationIndex={setCurrentStationIndex}
-      />
+      {isLoading && (
+        <div>
+          <img
+            src="public\Radio_World.png"
+            alt="logo"
+            className="loadingLogo"
+          />
+        </div>
+      )}
+      <div className={`main-radio-container ${!isLoading ? "loaded" : ""}`}>
+        <DisplayRadio
+          radiosRandom={radiosRandom}
+          toggleAudio={toggleAudio}
+          audioPlaying={audioPlaying}
+          currentStationIndex={currentStationIndex}
+          playPreviousStation={playPreviousStation}
+          playNextStation={playNextStation}
+        />
+      </div>
       <Footer />
     </div>
   );

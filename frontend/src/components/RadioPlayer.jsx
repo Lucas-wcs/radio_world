@@ -14,6 +14,26 @@ function RadioPlayer({
   return (
     <div type="button" className="container-radio">
       <div type="button" className="int-content">
+        <div className="container-animation">
+          <div className="animation">
+            <img
+              src="./Cassette.png"
+              alt="Cassette"
+              className="c1"
+              style={{
+                animation: audioPlaying ? "loop 2s linear infinite" : "none",
+              }}
+            />
+            <img
+              src="./Cassette2.png"
+              alt="Cassette2"
+              className="c2"
+              style={{
+                animation: audioPlaying ? "loop 2s linear infinite" : "none",
+              }}
+            />
+          </div>
+        </div>
         <button
           type="button"
           onClick={() => closeModal(false)}
