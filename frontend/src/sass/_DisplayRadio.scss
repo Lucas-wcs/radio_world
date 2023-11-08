@@ -2,16 +2,25 @@
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+  overflow: auto;  
+  height:60vh;
+  // margin-bottom: 50px;
+  
 }
 
 .display_radios {
   display: flex;
-  flex-wrap: wrap;
   flex: 1;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
   gap: 30px;
-  margin-bottom: 100px;
+  overscroll-behavior-block: contain;
+  scroll-snap-type : y mandatory;
+
+  
+  
+
 
   .space4 {
     flex: 1 21%;

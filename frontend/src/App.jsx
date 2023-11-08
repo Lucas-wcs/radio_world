@@ -11,10 +11,10 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("https://de1.api.radio-browser.info/json/stations?limit=100")
+      .get("https://de1.api.radio-browser.info/json/stations?limit=4000")
       .then((res) => {
         const tabRadios = [];
-        for (let i = 0; i < 16; i += 1) {
+        for (let i = 0; i < 200; i += 1) {
           const randomRadio =
             res.data[Math.floor(Math.random() * res.data.length)];
           if (
@@ -24,9 +24,11 @@ function App() {
             randomRadio.tags !== "" &&
             randomRadio.country !== ""
           ) {
+            const verifName = randomRadio.name;
             const verifUUID = randomRadio.stationuuid;
             if (
-              !tabRadios.find(({ stationuuid }) => stationuuid === verifUUID)
+              !tabRadios.find(({ stationuuid }) => stationuuid === verifUUID) &&
+              !tabRadios.find(({ name }) => name === verifName)
             ) {
               tabRadios.push(randomRadio);
             } else {

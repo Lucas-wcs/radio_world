@@ -31,6 +31,7 @@ function DisplayRadio({
             .map((station, currentStationIndex) => {
               return (
                 <div className="space4" key={station.stationuuid}>
+                  {console.log(station.stationuuid)}
                   <div className="rond">
                     <button
                       onClick={() => {
