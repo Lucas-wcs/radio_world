@@ -23,7 +23,8 @@ function App() {
             randomRadio.name !== "" &&
             randomRadio.stationuuid !== "" &&
             randomRadio.tags !== "" &&
-            randomRadio.country !== ""
+            randomRadio.country !== "" &&
+            randomRadio.codec === "MP3"
           ) {
             const verifName = randomRadio.name;
             const verifUUID = randomRadio.stationuuid;
@@ -109,6 +110,7 @@ function App() {
           currentStationIndex={currentStationIndex}
           playPreviousStation={playPreviousStation}
           playNextStation={playNextStation}
+          setCurrentStationIndex={setCurrentStationIndex}
         />
       </div>
       <Footer />
