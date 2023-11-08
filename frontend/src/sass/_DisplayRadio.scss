@@ -9,8 +9,13 @@
   opacity: 1;
   transition: opacity 1s;
   overflow: auto;  
-  height:60vh;
+  height:70vh;
   margin-inline: 10px;
+  
+
+  .container-display-radio {
+    height: 100%;
+  }
 }
 
 .main-radio-container.loaded::-webkit-scrollbar-track
@@ -33,24 +38,22 @@
 
 .display_radios {
   display: flex;
-  flex: 1;
+  height: 100%;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
-  gap: 30px;
-  
-
  
   .space4 {
-    flex: 1 21%;
+    width: 20%;
+    height:50%;
     display: flex;
     justify-content: center;
   }
 
   .radio {
     background-color: #fae7a7a5;
-    width: 200px;
-    height: 200px;
+    width: 95%;
+    height: 95%;
     border: 1px solid rgba(0, 0, 0, 0.93);
     border-radius: 300px;
     display: flex;
