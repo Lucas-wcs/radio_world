@@ -9,10 +9,18 @@ function RadioPlayer({
   toggleAudio,
   playNextStation,
   playPreviousStation,
+  closeModal,
 }) {
   return (
-    <div className="container-radio">
-      <div className="container-global">
+    <div type="button" className="container-radio">
+      <div type="button" className="int-content">
+        <button
+          type="button"
+          onClick={() => closeModal(false)}
+          className="button"
+        >
+          X
+        </button>
         <div className="container-button">
           <div
             className="prevStation"
@@ -64,6 +72,7 @@ RadioPlayer.propTypes = {
   toggleAudio: PropTypes.func.isRequired,
   playNextStation: PropTypes.func.isRequired,
   playPreviousStation: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
 };
 
 export default RadioPlayer;
