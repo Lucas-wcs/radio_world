@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import SearchBar from "./SearchBar";
+import RadioPlayer from "./RadioPlayer";
 
-function DisplayRadio({ radiosRandom }) {
+function DisplayRadio({
+  radiosRandom,
+  toggleAudio,
+  audioPlaying,
+  playNextStation,
+  playPreviousStation,
+  currentStationIndex,
+}) {
   const [searchValue, setSearchValue] = useState("");
+  const [openModal, setOpenModal] = useState(false);
 
   return (
     <div className="container-display-radio">
@@ -18,11 +27,13 @@ function DisplayRadio({ radiosRandom }) {
             )
             .map((station) => {
               return (
-                <div className="space4">
+                <div className="space4" key={station.stationuuid}>
                   <div className="rond">
                     <button
+                      onClick={() => {
+                        setOpenModal(true);
+                      }}
                       type="button"
-                      key={station.stationuuid}
                       className="radio"
                     >
                       <img
@@ -37,6 +48,17 @@ function DisplayRadio({ radiosRandom }) {
               );
             })}
       </div>
+      {radiosRandom.length > 0 && openModal && (
+        <RadioPlayer
+          closeModal={setOpenModal}
+          stations={radiosRandom}
+          audioPlaying={audioPlaying}
+          currentStationIndex={currentStationIndex}
+          toggleAudio={toggleAudio}
+          playNextStation={playNextStation}
+          playPreviousStation={playPreviousStation}
+        />
+      )}
     </div>
   );
 }
@@ -49,6 +71,11 @@ DisplayRadio.propTypes = {
       name: PropTypes.string.isRequired,
     })
   ).isRequired,
+  audioPlaying: PropTypes.bool.isRequired,
+  currentStationIndex: PropTypes.number.isRequired,
+  toggleAudio: PropTypes.func.isRequired,
+  playNextStation: PropTypes.func.isRequired,
+  playPreviousStation: PropTypes.func.isRequired,
 };
 
 export default DisplayRadio;

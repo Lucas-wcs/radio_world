@@ -3,7 +3,6 @@ import axios from "axios";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import DisplayRadio from "./components/DisplayRadio";
-import RadioPlayer from "./components/RadioPlayer";
 
 function App() {
   const [radiosRandom, setRadiosRandom] = useState([]);
@@ -73,26 +72,29 @@ function App() {
     const audioElement = document.getElementById("audioPlayer");
     if (audioElement) {
       audioElement.src = radiosRandom[currentStationIndex].url;
-      if (audioPlaying) {
-        audioElement.play();
-      }
+      console.warn("currentStationIndex : ", currentStationIndex);
+
+      audioElement.addEventListener("canplay", () => {
+        if (audioPlaying) {
+          audioElement.play();
+        } else {
+          audioElement.pause();
+        }
+      });
     }
   }, [currentStationIndex, audioPlaying]);
 
   return (
     <div className="main">
       <NavBar />
-      <DisplayRadio radiosRandom={radiosRandom} />
-      {radiosRandom.length > 0 && (
-        <RadioPlayer
-          stations={radiosRandom}
-          audioPlaying={audioPlaying}
-          currentStationIndex={currentStationIndex}
-          toggleAudio={toggleAudio}
-          playNextStation={playNextStation}
-          playPreviousStation={playPreviousStation}
-        />
-      )}
+      <DisplayRadio
+        radiosRandom={radiosRandom}
+        toggleAudio={toggleAudio}
+        audioPlaying={audioPlaying}
+        currentStationIndex={currentStationIndex}
+        playPreviousStation={playPreviousStation}
+        playNextStation={playNextStation}
+      />
       <Footer />
     </div>
   );
