@@ -64,6 +64,21 @@
       color: var(--secondary-color);
     }
   }
+
+  .filter-section-search-bar input {
+    flex: 1;
+    display: flex;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    border-radius: 1rem;
+    border: 1px solid var(--secondary-color);
+    height: 100%;
+    width: 400px;
+  }
+
+  .filter-section-search-bar input:focus {
+    outline: none;
+  }
   
   .filter-options-wrapper {
     overflow-y: scroll;
@@ -89,6 +104,10 @@
         color: var(--neutral-color);
         font-size: 1.5rem;
         background-color: transparent;
+      }
+
+      .option:hover {
+        background-color: var(--neutral-color-fade-2);
       }
 
       .is-active {
