@@ -1,11 +1,15 @@
-.container-display-radio {
+.main-radio-container {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+  opacity: 0;
+}
+
+.main-radio-container.loaded {
+  opacity: 1;
+  transition: opacity 1s;
   overflow: auto;  
   height:60vh;
-  // margin-bottom: 50px;
-  
 }
 
 .display_radios {
@@ -44,6 +48,7 @@
       6px 6px 12px #fae7a75b,
       -6px -6px 12px #fae7a75b;
   }
+
   button:active {
     color: #666;
     box-shadow:
@@ -59,6 +64,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 220px;
+
     p {
       font-family: "Montserrat", sans-serif;
       font-weight: bold;
