@@ -62,6 +62,8 @@ function DisplayRadio({
           toggleAudio={toggleAudio}
           playNextStation={playNextStation}
           playPreviousStation={playPreviousStation}
+          // favicon={radiosRandom.favicon}
+          // name={radiosRandom.name}
         />
       )}
     </div>

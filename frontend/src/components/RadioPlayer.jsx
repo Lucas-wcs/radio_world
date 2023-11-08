@@ -21,6 +21,8 @@ function RadioPlayer({
         >
           X
         </button>
+        {/* <img src={favicon}/>
+        <p>{name}</p> */}
         <div className="container-button">
           <div
             className="prevStation"
@@ -44,10 +46,6 @@ function RadioPlayer({
           >
             <img src="/suivant.png" alt="suivant" />
           </div>
-          {/* <div
-            className="btn" onclick={() => closeModal(false)}>
-            X
-          </div> */}
         </div>
       </div>
       {/* Lecteur audio caché */}
