@@ -33,21 +33,19 @@ function DisplayRadio({
       <div className="display_radios">
         {radiosRandom &&
           radiosRandom
-            .filter((radio) =>
-              radio.name.toLowerCase().includes(searchValue.toLowerCase())
-            )
-            .filter((radio) =>
-              radio.tags.toLowerCase().includes(styleSearchValue.toLowerCase())
-            )
-            .filter((radio) =>
-              radio.country
-                .toLowerCase()
-                .includes(countrySearchValue.toLowerCase())
+            .filter(
+              (radio) =>
+                radio.name.toLowerCase().includes(searchValue.toLowerCase()) &&
+                radio.tags
+                  .toLowerCase()
+                  .includes(styleSearchValue.toLowerCase()) &&
+                radio.country
+                  .toLowerCase()
+                  .includes(countrySearchValue.toLowerCase())
             )
             .map((station) => {
               return (
                 <div className="space4" key={station.stationuuid}>
-                  {console.info(station.stationuuid)}
                   <div className="rond">
                     <button
                       onClick={() => {

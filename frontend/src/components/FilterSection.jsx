@@ -5,12 +5,7 @@ import axios from "axios";
 // import { getCountryData } from "../services/countryData";
 // import { getStyleData } from "../services/styleData";
 
-function FilterSection({
-  // styleSearchValue,
-  // countrySearchValue,
-  setStyleSearchValue,
-  setCountrySearchValue,
-}) {
+function FilterSection({ setStyleSearchValue, setCountrySearchValue }) {
   const [filterCriteriaButton, setFilterCriteriaButton] = useState(0);
   const [dataCountry, setDataCountry] = useState([]);
   const [dataStyle, setDataStyle] = useState([]);
@@ -42,35 +37,22 @@ function FilterSection({
     filterSection.style.display = "none";
   }
 
-  function handleFilterCriteriaActiveState() {
-    const filterCriteria = document.querySelectorAll(".filter-criteria");
-    filterCriteria.forEach((criteria) => {
-      criteria.addEventListener("click", () => {
-        filterCriteria.forEach((oneCriteria) => {
-          oneCriteria.classList.remove("is-active");
-        });
-        criteria.classList.add("is-active");
-      });
-      if (criteria.classList.contains("is-active")) {
-        setFilterCriteriaButton(1);
-      } else {
-        setFilterCriteriaButton(0);
-      }
-    });
+  function handleFilterCriteriaActiveState(e) {
+    setFilterCriteriaButton(parseInt(e.target.value, 10));
   }
 
-  function handleClickOnOptionButton() {
-    const clickedOptionButton = document.querySelectorAll(".option");
-    clickedOptionButton.forEach((optionButton) => {
-      optionButton.addEventListener("click", () => {
-        if (filterCriteriaButton) {
-          setCountrySearchValue(optionButton.textContent);
-        } else {
-          setStyleSearchValue(optionButton.textContent);
-        }
-      });
-    });
-    makeFilterSectionDisappear();
+  function handleClickOnOptionButton(e) {
+    if (filterCriteriaButton) {
+      setCountrySearchValue(e.target.textContent);
+    } else {
+      setStyleSearchValue(e.target.textContent);
+    }
+  }
+
+  function handleClickOnResetButton() {
+    setSearchValue("");
+    setCountrySearchValue("");
+    setStyleSearchValue("");
   }
 
   return (
@@ -86,14 +68,16 @@ function FilterSection({
         <button
           onClick={handleFilterCriteriaActiveState}
           type="button"
-          className="filter-criteria is-active"
+          value={0}
+          className={`filter-criteria ${!filterCriteriaButton && "is-active"}`}
         >
           Style
         </button>
         <button
           onClick={handleFilterCriteriaActiveState}
           type="button"
-          className="filter-criteria"
+          className={`filter-criteria ${filterCriteriaButton && "is-active"}`}
+          value={1}
         >
           Country
         </button>
@@ -140,13 +124,20 @@ function FilterSection({
                 </div>
               ))}
       </div>
+      <div className="reset-button-wrapper">
+        <button
+          type="button"
+          className="reset-button"
+          onClick={handleClickOnResetButton}
+        >
+          Reset filters
+        </button>
+      </div>
     </div>
   );
 }
 
 FilterSection.propTypes = {
-  // styleSearchValue: PropTypes.string.isRequired,
-  // countrySearchValue: PropTypes.string.isRequired,
   setStyleSearchValue: PropTypes.func.isRequired,
   setCountrySearchValue: PropTypes.func.isRequired,
 };
