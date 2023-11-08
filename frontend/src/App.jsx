@@ -8,13 +8,14 @@ function App() {
   const [radiosRandom, setRadiosRandom] = useState([]);
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [currentStationIndex, setCurrentStationIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios
-      .get("https://de1.api.radio-browser.info/json/stations?limit=100")
+      .get("https://de1.api.radio-browser.info/json/stations?limit=4000")
       .then((res) => {
         const tabRadios = [];
-        for (let i = 0; i < 16; i += 1) {
+        for (let i = 0; i < 200; i += 1) {
           const randomRadio =
             res.data[Math.floor(Math.random() * res.data.length)];
           if (
@@ -35,16 +36,22 @@ function App() {
           } else {
             i -= 1;
           }
-          setRadiosRandom(tabRadios);
         }
+        setRadiosRandom(tabRadios);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error(
+          "Erreur lors de la récupération des données de l'API.",
+          error
+        );
+        setIsLoading(false);
       });
   }, []);
 
   const toggleAudio = () => {
     setAudioPlaying(!audioPlaying);
   };
-
-  /* station suivante */
 
   const playNextStation = () => {
     if (currentStationIndex < radiosRandom.length - 1) {
@@ -55,8 +62,6 @@ function App() {
     setAudioPlaying(true);
   };
 
-  /* station précédente */
-
   const playPreviousStation = () => {
     if (currentStationIndex > 0) {
       setCurrentStationIndex(currentStationIndex - 1);
@@ -65,8 +70,6 @@ function App() {
     }
     setAudioPlaying(true);
   };
-
-  /* Play-pause */
 
   useEffect(() => {
     const audioElement = document.getElementById("audioPlayer");
@@ -87,14 +90,25 @@ function App() {
   return (
     <div className="main">
       <NavBar />
-      <DisplayRadio
-        radiosRandom={radiosRandom}
-        toggleAudio={toggleAudio}
-        audioPlaying={audioPlaying}
-        currentStationIndex={currentStationIndex}
-        playPreviousStation={playPreviousStation}
-        playNextStation={playNextStation}
-      />
+      {isLoading && (
+        <div>
+          <img
+            src="public\Radio_World.png"
+            alt="logo"
+            className="loadingLogo"
+          />
+        </div>
+      )}
+      <div className={`main-radio-container ${!isLoading ? "loaded" : ""}`}>
+        <DisplayRadio
+          radiosRandom={radiosRandom}
+          toggleAudio={toggleAudio}
+          audioPlaying={audioPlaying}
+          currentStationIndex={currentStationIndex}
+          playPreviousStation={playPreviousStation}
+          playNextStation={playNextStation}
+        />
+      </div>
       <Footer />
     </div>
   );
