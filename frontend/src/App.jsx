@@ -77,7 +77,6 @@ function App() {
     const audioElement = document.getElementById("audioPlayer");
     if (audioElement) {
       audioElement.src = radiosRandom[currentStationIndex].url;
-      
 
       audioElement.addEventListener("canplay", () => {
         if (audioPlaying) {
@@ -109,6 +108,7 @@ function App() {
           currentStationIndex={currentStationIndex}
           playPreviousStation={playPreviousStation}
           playNextStation={playNextStation}
+          setCurrentStationIndex={setCurrentStationIndex}
         />
       </div>
       <Footer />

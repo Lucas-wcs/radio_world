@@ -8,8 +8,8 @@
 .main-radio-container.loaded {
   opacity: 1;
   transition: opacity 1s;
-  overflow: auto;  
-  height:60vh;
+  overflow: auto;
+  height: 60vh;
 }
 
 .display_radios {
@@ -20,11 +20,7 @@
   justify-content: space-around;
   gap: 30px;
   overscroll-behavior-block: contain;
-  scroll-snap-type : y mandatory;
-
-  
-  
-
+  scroll-snap-type: y mandatory;
 
   .space4 {
     flex: 1 21%;
