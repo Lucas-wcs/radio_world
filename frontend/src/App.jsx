@@ -100,7 +100,7 @@ function App() {
           />
         </div>
       )}
-      <div className={`main-radio-container ${!isLoading ? "loaded" : ""}`}>
+      <div>
         <DisplayRadio
           radiosRandom={radiosRandom}
           toggleAudio={toggleAudio}
@@ -109,6 +109,7 @@ function App() {
           playPreviousStation={playPreviousStation}
           playNextStation={playNextStation}
           setCurrentStationIndex={setCurrentStationIndex}
+          isLoading={isLoading}
         />
       </div>
       <Footer />

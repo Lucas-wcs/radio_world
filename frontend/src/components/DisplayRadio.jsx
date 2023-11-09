@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import SearchBar from "./SearchBar";
-import { createPortal } from "react-dom";
 import RadioPlayer from "./RadioPlayer";
-
+import FilterButton from "./FilterButton";
+import FilterSection from "./FilterSection";
 
 function DisplayRadio({
   radiosRandom,
@@ -12,31 +12,46 @@ function DisplayRadio({
   playNextStation,
   playPreviousStation,
   currentStationIndex,
-  setCurrentStationIndex
+  setCurrentStationIndex,
+  isLoading,
 }) {
   const [searchValue, setSearchValue] = useState("");
   const [openModal, setOpenModal] = useState(false);
-
+  const [styleSearchValue, setStyleSearchValue] = useState("");
+  const [countrySearchValue, setCountrySearchValue] = useState("");
   return (
     <div className="container-display-radio">
       <div className="search-feature">
         <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
+        <FilterButton />
       </div>
-      <div className="display_radios">
+      <FilterSection
+        styleSearchValue={styleSearchValue}
+        countrySearchValue={countrySearchValue}
+        setStyleSearchValue={setStyleSearchValue}
+        setCountrySearchValue={setCountrySearchValue}
+      />
+      <div className={`display_radios ${!isLoading ? "loaded" : ""}`}>
         {radiosRandom &&
           radiosRandom
-            .filter((radio) =>
-              radio.name.toLowerCase().includes(searchValue.toLowerCase())
+            .filter(
+              (radio) =>
+                radio.name.toLowerCase().includes(searchValue.toLowerCase()) &&
+                radio.tags
+                  .toLowerCase()
+                  .includes(styleSearchValue.toLowerCase()) &&
+                radio.country
+                  .toLowerCase()
+                  .includes(countrySearchValue.toLowerCase())
             )
-            .map((station, currentStationIndex) => {
+            .map((station, selectedCurrentStationIndex) => {
               return (
                 <div className="space4" key={station.stationuuid}>
-                  {console.log(station.stationuuid)}
                   <div className="rond">
                     <button
                       onClick={() => {
                         setOpenModal(true);
-                        setCurrentStationIndex(currentStationIndex);
+                        setCurrentStationIndex(selectedCurrentStationIndex);
                       }}
                       type="button"
                       className="radio"
@@ -67,10 +82,7 @@ function DisplayRadio({
         />
       )}
     </div>
-   
   );
-
-
 }
 
 DisplayRadio.propTypes = {
@@ -79,6 +91,8 @@ DisplayRadio.propTypes = {
       stationuuid: PropTypes.string.isRequired,
       favicon: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
+      tags: PropTypes.string.isRequired,
+      country: PropTypes.string.isRequired,
     })
   ).isRequired,
   audioPlaying: PropTypes.bool.isRequired,
@@ -86,6 +100,8 @@ DisplayRadio.propTypes = {
   toggleAudio: PropTypes.func.isRequired,
   playNextStation: PropTypes.func.isRequired,
   playPreviousStation: PropTypes.func.isRequired,
+  setCurrentStationIndex: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default DisplayRadio;
