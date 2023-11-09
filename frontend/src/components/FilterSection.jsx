@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
-// TODO: refactor to use the API from an external file
-// import { getCountryData } from "../services/countryData";
-// import { getStyleData } from "../services/styleData";
+import getDataCountry from "../services/countryData";
+import getDataStyle from "../services/styleData";
 
-function FilterSection({ setStyleSearchValue, setCountrySearchValue }) {
+function FilterSection({
+  setStyleSearchValue,
+  setCountrySearchValue,
+  isVisible,
+}) {
   const [filterCriteriaButton, setFilterCriteriaButton] = useState(0);
   const [dataCountry, setDataCountry] = useState([]);
   const [dataStyle, setDataStyle] = useState([]);
@@ -14,23 +16,6 @@ function FilterSection({ setStyleSearchValue, setCountrySearchValue }) {
   function handleSearchBarChange(event) {
     setSearchValue(event.target.value);
   }
-
-  useEffect(() => {
-    axios
-      .get("https://de1.api.radio-browser.info/json/countries?order=name")
-      .then((response) => {
-        setDataCountry(response.data);
-      })
-      .catch((error) => console.error("Error fetching data: ", error));
-  }, []);
-  useEffect(() => {
-    axios
-      .get("https://de1.api.radio-browser.info/json/tags?order=stationcount")
-      .then((response) => {
-        setDataStyle(response.data);
-      })
-      .catch((error) => console.error("Error fetching data: ", error));
-  }, []);
 
   function makeFilterSectionDisappear() {
     const filterSection = document.querySelector(".filter-section");
@@ -55,8 +40,20 @@ function FilterSection({ setStyleSearchValue, setCountrySearchValue }) {
     setStyleSearchValue("");
   }
 
+  useEffect(() => {
+    getDataStyle()
+      .then((styleData) => setDataStyle(styleData))
+      .catch((error) => console.error(error));
+  }, []);
+
+  useEffect(() => {
+    getDataCountry()
+      .then((countryData) => setDataCountry(countryData))
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
-    <div className="filter-section">
+    <div className={`filter-section ${isVisible && "is-visible"}`}>
       <button
         type="button"
         onClick={makeFilterSectionDisappear}
@@ -66,16 +63,16 @@ function FilterSection({ setStyleSearchValue, setCountrySearchValue }) {
       </button>
       <div className="filter-criteria-wrapper">
         <button
-          onClick={handleFilterCriteriaActiveState}
           type="button"
-          value={0}
+          onClick={handleFilterCriteriaActiveState}
           className={`filter-criteria ${!filterCriteriaButton && "is-active"}`}
+          value={0}
         >
           Style
         </button>
         <button
-          onClick={handleFilterCriteriaActiveState}
           type="button"
+          onClick={handleFilterCriteriaActiveState}
           className={`filter-criteria ${filterCriteriaButton && "is-active"}`}
           value={1}
         >
@@ -104,7 +101,7 @@ function FilterSection({ setStyleSearchValue, setCountrySearchValue }) {
                     type="button"
                     className="option"
                   >
-                    <p key={country.name}>{country.name}</p>
+                    <p>{country.name}</p>
                   </button>
                 </div>
               ))
@@ -119,7 +116,7 @@ function FilterSection({ setStyleSearchValue, setCountrySearchValue }) {
                     type="button"
                     className="option"
                   >
-                    <p key={tag.name}>{tag.name}</p>
+                    <p>{tag.name}</p>
                   </button>
                 </div>
               ))}
@@ -140,6 +137,7 @@ function FilterSection({ setStyleSearchValue, setCountrySearchValue }) {
 FilterSection.propTypes = {
   setStyleSearchValue: PropTypes.func.isRequired,
   setCountrySearchValue: PropTypes.func.isRequired,
+  isVisible: PropTypes.bool.isRequired,
 };
 
 export default FilterSection;

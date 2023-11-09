@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
-function FilterButton({ isVisible, setIsVisible }) {
+function FilterButton(/* { isVisible, setIsVisible } */) {
   // function makeFilterSectionAppear(e) {
   //   e.target.style.display = "flex";
   // }
@@ -9,13 +9,18 @@ function FilterButton({ isVisible, setIsVisible }) {
     filterSection.style.display = "flex";
   }
 
-  function toggleVisibility() {
-    setIsVisible(!isVisible);
+  // function toggleVisibility() {
+  //   setIsVisible(!isVisible);
+  // }
+
+  function handleClickOnFilterButton() {
+    // toggleVisibility();
+    makeFilterSectionAppear();
   }
 
   return (
     <button
-      onClick={makeFilterSectionAppear}
+      onClick={handleClickOnFilterButton}
       type="button"
       className="filter-button"
     >
@@ -25,9 +30,9 @@ function FilterButton({ isVisible, setIsVisible }) {
   );
 }
 
-FilterButton.propTypes = {
-  isVisible: PropTypes.bool.isRequired,
-  setIsVisible: PropTypes.func.isRequired,
-};
+// FilterButton.propTypes = {
+//   isVisible: PropTypes.bool.isRequired,
+//   setIsVisible: PropTypes.func.isRequired,
+// };
 
 export default FilterButton;
