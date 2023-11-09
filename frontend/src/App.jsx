@@ -1,4 +1,3 @@
-import "./sass/_app.scss";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import NavBar from "./components/NavBar";
