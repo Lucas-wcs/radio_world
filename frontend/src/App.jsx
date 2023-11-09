@@ -23,7 +23,8 @@ function App() {
             randomRadio.name !== "" &&
             randomRadio.stationuuid !== "" &&
             randomRadio.tags !== "" &&
-            randomRadio.country !== ""
+            randomRadio.country !== "" &&
+            randomRadio.codec === "MP3"
           ) {
             const verifName = randomRadio.name;
             const verifUUID = randomRadio.stationuuid;
@@ -100,7 +101,7 @@ function App() {
           />
         </div>
       )}
-      <div className={`main-radio-container ${!isLoading ? "loaded" : ""}`}>
+      <div>
         <DisplayRadio
           radiosRandom={radiosRandom}
           toggleAudio={toggleAudio}
@@ -109,6 +110,7 @@ function App() {
           playPreviousStation={playPreviousStation}
           playNextStation={playNextStation}
           setCurrentStationIndex={setCurrentStationIndex}
+          isLoading={isLoading}
         />
       </div>
       <Footer />
