@@ -8,6 +8,7 @@
   gap: 1rem;
   border-radius: 1rem;
   background-color: var(--secondary-color-fade-1);
+
   // *
 
   // ? My CSS
@@ -118,4 +119,7 @@
       background-color: inherit;
     }
   }
+}
+
+@media screen and (max-width: 360px) {
 }

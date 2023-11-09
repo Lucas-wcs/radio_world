@@ -33,3 +33,11 @@ body {
   position: relative;
   height: 100vh;
 }
+
+@media screen and (max-width: 425px) {
+  body {
+    background-image: url("./Micro.png");
+    background-size: 75%;
+    background-color: #f5ab50c5;
+  }
+}
