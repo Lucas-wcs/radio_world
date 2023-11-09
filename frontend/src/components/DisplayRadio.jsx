@@ -13,6 +13,7 @@ function DisplayRadio({
   playPreviousStation,
   currentStationIndex,
   setCurrentStationIndex,
+  isLoading,
 }) {
   const [searchValue, setSearchValue] = useState("");
   const [openModal, setOpenModal] = useState(false);
@@ -30,7 +31,7 @@ function DisplayRadio({
         setStyleSearchValue={setStyleSearchValue}
         setCountrySearchValue={setCountrySearchValue}
       />
-      <div className="display_radios">
+      <div className={`display_radios ${!isLoading ? "loaded" : ""}`}>
         {radiosRandom &&
           radiosRandom
             .filter(
@@ -43,14 +44,14 @@ function DisplayRadio({
                   .toLowerCase()
                   .includes(countrySearchValue.toLowerCase())
             )
-            .map((station) => {
+            .map((station, selectedCurrentStationIndex) => {
               return (
                 <div className="space4" key={station.stationuuid}>
                   <div className="rond">
                     <button
                       onClick={() => {
                         setOpenModal(true);
-                        setCurrentStationIndex(currentStationIndex);
+                        setCurrentStationIndex(selectedCurrentStationIndex);
                       }}
                       type="button"
                       className="radio"
@@ -100,6 +101,7 @@ DisplayRadio.propTypes = {
   playNextStation: PropTypes.func.isRequired,
   playPreviousStation: PropTypes.func.isRequired,
   setCurrentStationIndex: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default DisplayRadio;
