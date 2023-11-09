@@ -18,17 +18,20 @@ function DisplayRadio({
   const [openModal, setOpenModal] = useState(false);
   const [styleSearchValue, setStyleSearchValue] = useState("");
   const [countrySearchValue, setCountrySearchValue] = useState("");
+  const [isVisible, setIsVisible] = useState(false);
+
   return (
     <div className="container-display-radio">
       <div className="search-feature">
         <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
-        <FilterButton />
+        <FilterButton isVisible={isVisible} setIsVisible={setIsVisible} />
       </div>
       <FilterSection
         styleSearchValue={styleSearchValue}
         countrySearchValue={countrySearchValue}
         setStyleSearchValue={setStyleSearchValue}
         setCountrySearchValue={setCountrySearchValue}
+        isVisible={isVisible}
       />
       <div className="display_radios">
         {radiosRandom &&

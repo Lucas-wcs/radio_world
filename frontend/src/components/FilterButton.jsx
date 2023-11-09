@@ -1,10 +1,16 @@
-function FilterButton() {
+import PropTypes from "prop-types";
+
+function FilterButton({ isVisible, setIsVisible }) {
   // function makeFilterSectionAppear(e) {
   //   e.target.style.display = "flex";
   // }
   function makeFilterSectionAppear() {
     const filterSection = document.querySelector(".filter-section");
     filterSection.style.display = "flex";
+  }
+
+  function toggleVisibility() {
+    setIsVisible(!isVisible);
   }
 
   return (
@@ -18,5 +24,10 @@ function FilterButton() {
     </button>
   );
 }
+
+FilterButton.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  setIsVisible: PropTypes.func.isRequired,
+};
 
 export default FilterButton;

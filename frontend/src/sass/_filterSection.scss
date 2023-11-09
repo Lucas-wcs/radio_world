@@ -40,6 +40,7 @@
       aspect-ratio: 1/1;
     }
   }
+
   .filter-criteria-wrapper {
     display: flex;
     justify-content: center;
@@ -117,7 +118,10 @@
   }
   
   .filter-options-wrapper {
+    flex: auto;
     overflow-y: scroll;
+    height: 28rem;
+    width: 100%;
     .options {
       display: flex;
       padding: 0 2rem 1rem 2rem;
@@ -192,5 +196,9 @@
       background-color: var(--neutral-color-fade-3);
     }
   }
+}
+
+.filter-section.is-visible {
+  display: flex;
 }
 
