@@ -6,7 +6,14 @@
   align-items: center;
   gap: 1rem;
   border-radius: 1rem;
+  background-color: var(--secondary-color-fade-1);
+
+  // *
+
+  // ? My CSS
+
   background-color: var(--secondary-color-fade-3);
+
   max-height: 50rem;
   position: absolute;
   top: 50%;
@@ -192,5 +199,9 @@
       background-color: var(--neutral-color-fade-3);
     }
   }
+}
+
+
+@media screen and (max-width: 360px) {
 }
 
