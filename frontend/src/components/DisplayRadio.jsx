@@ -11,8 +11,7 @@ function DisplayRadio({
   playPreviousStation,
   currentStationIndex,
   setCurrentStationIndex,
-  isLoading
-
+  isLoading,
 }) {
   const [searchValue, setSearchValue] = useState("");
   const [openModal, setOpenModal] = useState(false);
@@ -61,8 +60,6 @@ function DisplayRadio({
           toggleAudio={toggleAudio}
           playNextStation={playNextStation}
           playPreviousStation={playPreviousStation}
-          // favicon={radiosRandom.favicon}
-          // name={radiosRandom.name}
         />
       )}
     </div>
@@ -83,6 +80,7 @@ DisplayRadio.propTypes = {
   playNextStation: PropTypes.func.isRequired,
   playPreviousStation: PropTypes.func.isRequired,
   setCurrentStationIndex: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default DisplayRadio;
