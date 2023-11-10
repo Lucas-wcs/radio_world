@@ -78,7 +78,6 @@ function App() {
     const audioElement = document.getElementById("audioPlayer");
     if (audioElement) {
       audioElement.src = radiosRandom[currentStationIndex].url;
-
       audioElement.addEventListener("canplay", () => {
         if (audioPlaying) {
           audioElement.play();
@@ -93,7 +92,7 @@ function App() {
     <div className="main">
       <NavBar />
       {isLoading && (
-        <div>
+        <div className="container-loading-logo">
           <img
             src="public\Radio_World.png"
             alt="logo"

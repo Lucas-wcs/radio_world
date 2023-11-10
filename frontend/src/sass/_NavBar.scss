@@ -5,6 +5,7 @@
   align-items: center;
   background-color: #c34e3a;
   box-shadow: 0px 8px 1px rgba(0, 0, 0, 0.232);
+  margin-bottom: 8px;
   margin-bottom: 5vh;
   animation: slide-down 0.6s linear forwards;
 
@@ -34,6 +35,10 @@
     animation-name: slideIn;
     animation-duration: 2s;
     animation-iteration-count: initial;
+    display: flex;
+    padding-right: 10px;
+    align-items: center;
+    justify-content: center;
 
     @keyframes slideIn {
       // 0% {
@@ -44,19 +49,76 @@
       // }
     }
 
-    .logoRS1 {
-      height: 55%;
+    .RS1 {
+      width: 116px;
+      height: 50px;
+      display: flex;
+      justify-content: right;
     }
-
-    .logoRS2 {
-      height: 55%;
+    .RS2 {
+      width: 116px;
+      height: 50px;
+      display: flex;
+      justify-content: left;
     }
 
     img {
-      height: 70%;
-      width: 50%;
-      padding: 2px;
-      padding-right: 20px;
+      height: 100%;
+      padding: 5px;
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container-logo {
+    flex: 1;
+    margin-right: 9%;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .navbar {
+    box-shadow: none;
+    margin-bottom: 43px;
+
+    .logoRW {
+      height: 100px;
+      width: 150px;
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .container-logo {
+    margin-right: 8%;
+  }
+  .navbar {
+    box-shadow: none;
+    margin-bottom: 43px;
+    .logoRS {
+      flex-direction: column;
+      justify-content: center;
+      padding-right: 0px;
+
+      .RS1 {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+      }
+      .RS2 {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+      }
+
+      img {
+        height: 80%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .container-logo {
+    margin-right: 2%;
   }
 }
