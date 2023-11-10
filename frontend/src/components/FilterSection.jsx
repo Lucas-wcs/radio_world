@@ -2,8 +2,12 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 
-
-function FilterSection({ searchValue, setSearchValue, setStyleSearchValue, setCountrySearchValue }) {
+function FilterSection({
+  searchValue,
+  setSearchValue,
+  setStyleSearchValue,
+  setCountrySearchValue,
+}) {
   const [filterCriteriaButton, setFilterCriteriaButton] = useState(0);
   const [dataCountry, setDataCountry] = useState([]);
   const [dataStyle, setDataStyle] = useState([]);

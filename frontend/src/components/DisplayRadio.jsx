@@ -35,9 +35,11 @@ function DisplayRadio({
       <div className={`display_radios ${!isLoading ? "loaded" : ""}`}>
         {radiosRandom &&
           radiosRandom
+            .filter((radio) =>
+              radio.name.toLowerCase().includes(searchValue.toLowerCase())
+            )
             .filter(
               (radio) =>
-                radio.name.toLowerCase().includes(searchValue.toLowerCase()) &&
                 radio.tags
                   .toLowerCase()
                   .includes(styleSearchValue.toLowerCase()) &&
