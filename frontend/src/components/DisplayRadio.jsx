@@ -4,6 +4,7 @@ import SearchBar from "./SearchBar";
 import RadioPlayer from "./RadioPlayer";
 import FilterButton from "./FilterButton";
 import FilterSection from "./FilterSection";
+// import Favorite from "./Favorite";
 
 function DisplayRadio({
   radiosRandom,
@@ -19,6 +20,7 @@ function DisplayRadio({
   const [openModal, setOpenModal] = useState(false);
   const [styleSearchValue, setStyleSearchValue] = useState("");
   const [countrySearchValue, setCountrySearchValue] = useState("");
+  // const [favoriteRadiosRandom, setFavoriteRadiosRandom] = useState([]);
   return (
     <div className="container-display-radio">
       <div className="search-feature">
@@ -48,6 +50,13 @@ function DisplayRadio({
               return (
                 <div className="space4" key={station.stationuuid}>
                   <div className="rond">
+                    {/* <Favorite
+                      radiosRandom={radiosRandom}
+                      favoriteRadiosRandom={favoriteRadiosRandom}
+                      setFavoriteRadiosRandom={setFavoriteRadiosRandom}
+                      setCurrentStationIndex={setCurrentStationIndex}
+                      selectedCurrentStationIndex={selectedCurrentStationIndex}
+                    /> */}
                     <button
                       onClick={() => {
                         setOpenModal(true);
@@ -77,8 +86,6 @@ function DisplayRadio({
           toggleAudio={toggleAudio}
           playNextStation={playNextStation}
           playPreviousStation={playPreviousStation}
-          // favicon={radiosRandom.favicon}
-          // name={radiosRandom.name}
         />
       )}
     </div>
