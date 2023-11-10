@@ -94,7 +94,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     border-radius: 50%;
+
 
     p {
       font-family: "Montserrat", sans-serif;
@@ -107,6 +109,18 @@
 
     .favicon {
       width: 70px;
+    }
+
+    .favorite {
+      position: absolute;
+      transform: translate(200%, -200%);
+      z-index: 1;
+      background: none;
+      border: none;
+      img {
+        height: 35px;
+        width: 35px;
+      }
     }
   }
 }
