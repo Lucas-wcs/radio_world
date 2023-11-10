@@ -9,6 +9,9 @@ function App() {
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [currentStationIndex, setCurrentStationIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchValue, setSearchValue] = useState("");
+  const [styleSearchValue, setStyleSearchValue] = useState("");
+  const [countrySearchValue, setCountrySearchValue] = useState("");
 
   useEffect(() => {
     axios
@@ -90,7 +93,11 @@ function App() {
 
   return (
     <div className="main">
-      <NavBar />
+      <NavBar
+        setSearchValue={setSearchValue}
+        setStyleSearchValue={setStyleSearchValue}
+        setCountrySearchValue={setCountrySearchValue}
+      />
       {isLoading && (
         <div className="container-loading-logo">
           <img
@@ -110,6 +117,12 @@ function App() {
           playNextStation={playNextStation}
           setCurrentStationIndex={setCurrentStationIndex}
           isLoading={isLoading}
+          searchValue={searchValue}
+          styleSearchValue={styleSearchValue}
+          countrySearchValue={countrySearchValue}
+          setSearchValue={setSearchValue}
+          setStyleSearchValue={setStyleSearchValue}
+          setCountrySearchValue={setCountrySearchValue}
         />
       </div>
       <Footer />

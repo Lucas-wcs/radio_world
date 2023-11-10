@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import SearchBar from "./SearchBar";
 import RadioPlayer from "./RadioPlayer";
-import FilterButton from "./FilterButton";
 import FilterSection from "./FilterSection";
 // import Favorite from "./Favorite";
 
@@ -15,23 +13,24 @@ function DisplayRadio({
   currentStationIndex,
   setCurrentStationIndex,
   isLoading,
+  searchValue,
+  setSearchValue,
+  styleSearchValue,
+  setStyleSearchValue,
+  countrySearchValue,
+  setCountrySearchValue,
 }) {
-  const [searchValue, setSearchValue] = useState("");
   const [openModal, setOpenModal] = useState(false);
-  const [styleSearchValue, setStyleSearchValue] = useState("");
-  const [countrySearchValue, setCountrySearchValue] = useState("");
   // const [favoriteRadiosRandom, setFavoriteRadiosRandom] = useState([]);
   return (
     <div className="container-display-radio">
-      <div className="search-feature">
-        <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
-        <FilterButton />
-      </div>
       <FilterSection
         styleSearchValue={styleSearchValue}
         countrySearchValue={countrySearchValue}
         setStyleSearchValue={setStyleSearchValue}
         setCountrySearchValue={setCountrySearchValue}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
       />
       <div className={`display_radios ${!isLoading ? "loaded" : ""}`}>
         {radiosRandom &&
@@ -109,6 +108,12 @@ DisplayRadio.propTypes = {
   playPreviousStation: PropTypes.func.isRequired,
   setCurrentStationIndex: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  searchValue: PropTypes.string.isRequired,
+  setSearchValue: PropTypes.func.isRequired,
+  styleSearchValue: PropTypes.string.isRequired,
+  setStyleSearchValue: PropTypes.func.isRequired,
+  countrySearchValue: PropTypes.string.isRequired,
+  setCountrySearchValue: PropTypes.func.isRequired,
 };
 
 export default DisplayRadio;

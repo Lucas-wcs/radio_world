@@ -1,6 +1,14 @@
-import React from "react";
+import PropTypes from "prop-types";
+import SearchBar from "./SearchBar";
+import FilterButton from "./FilterButton";
 
-function NavBar() {
+function NavBar({
+  searchValue,
+  setSearchValue,
+  styleSearchValue,
+  countrySearchValue,
+  radiosRandom,
+}) {
   return (
     <div className="navbar">
       <div className="container-logo">
@@ -15,7 +23,23 @@ function NavBar() {
         className="favoriteButton"
         alt="favoriteButton"
       /> */}
-      {/* <div className="logoRS">
+
+      <div className="search-feature">
+        <div className="Searchbar">
+          <SearchBar
+            radiosRandom={radiosRandom}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+            styleSearchValue={styleSearchValue}
+            countrySearchValue={countrySearchValue}
+          />
+        </div>
+        <div className="container-filter">
+          <FilterButton />
+        </div>
+      </div>
+      {/*
+      <div className="logoRS">
         <div className="RS1">
           <img src="/twitter.png" alt="Twitter logo" />
           <img src="/instagram.png" alt="Insta logo" />
@@ -28,5 +52,21 @@ function NavBar() {
     </div>
   );
 }
+
+NavBar.propTypes = {
+  searchValue: PropTypes.string.isRequired,
+  setSearchValue: PropTypes.func.isRequired,
+  styleSearchValue: PropTypes.string.isRequired,
+  countrySearchValue: PropTypes.string.isRequired,
+  radiosRandom: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
+      favicon: PropTypes.string.isRequired,
+      tags: PropTypes.string.isRequired,
+      country: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
 
 export default NavBar;
