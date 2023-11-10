@@ -1,20 +1,20 @@
 
-.main-radio-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  opacity: 0;
-  height: 100%;
-  padding-top: 75px;
-  width: 100vw;
-  margin: 0 auto;
-}
+// .main-radio-container {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 0.5em;
+//   opacity: 0;
+//   height: 100%;
+//   padding-top: 75px;
+//   width: 100vw;
+//   margin: 0 auto;
+// }
 
-.main-radio-container.loaded {
-  opacity: 1;
-  transition: opacity 1s;
-  overflow: auto;
-  height: 75.3vh;
+// .main-radio-container.loaded {
+//   opacity: 1;
+//   transition: opacity 1s;
+//   overflow: auto;
+//   height: 75.3vh;
 
 .display_radios.loaded {
   opacity: 1;
@@ -133,23 +133,23 @@
   transform: translateX(-50%);
 }
 
-@media screen and (max-width: 1024px) {
-  .main-radio-container.loaded {
-    height: 74.2vh;
-  }
-}
+// @media screen and (max-width: 1024px) {
+//   .main-radio-container.loaded {
+//     height: 74.2vh;
+//   }
+// }
 
-@media screen and (max-width: 768px) {
-  .main-radio-container.loaded {
-    height: 70vh;
-  }
-}
-@media screen and (max-width: 425px) {
-  .main-radio-container.loaded {
-    height: 70vh;
-  }
-  .main-radio-container {
-    padding-top: 20px;
+// @media screen and (max-width: 768px) {
+//   .main-radio-container.loaded {
+//     height: 70vh;
+//   }
+// }
+// @media screen and (max-width: 425px) {
+//   .main-radio-container.loaded {
+//     height: 70vh;
+//   }
+//   .main-radio-container {
+//     padding-top: 20px;
 
     .space4 {
       width: 35%;
