@@ -1,6 +1,8 @@
 import React from "react";
+import SearchBar from "./SearchBar";
+import FilterButton from "./FilterButton";
 
-function NavBar() {
+function NavBar({searchValue, setSearchValue, styleSearchValue, countrySearchValue, radiosRandom}) {
   return (
     <div className="navbar">
       <div className="container-logo">
@@ -10,11 +12,14 @@ function NavBar() {
           alt="Radio World logo"
         />
       </div>
-      {/* <img
-        src="src/images/heart.png"
-        className="favoriteButton"
-        alt="favoriteButton"
-      /> */}
+      <div className="search-feature">
+        <div className="Searchbar">
+          <SearchBar radiosRandom={radiosRandom} searchValue={searchValue} setSearchValue={setSearchValue} styleSearchValue={styleSearchValue} countrySearchValue={countrySearchValue}/>
+        </div>
+        <div className="container-filter">
+          <FilterButton/>
+        </div>
+      </div>
       <div className="logoRS">
         <div className="RS1">
           <img src="/twitter.png" alt="Twitter logo" />
