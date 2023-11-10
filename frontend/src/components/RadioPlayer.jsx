@@ -9,10 +9,40 @@ function RadioPlayer({
   toggleAudio,
   playNextStation,
   playPreviousStation,
+  closeModal,
 }) {
   return (
-    <div className="container-radio">
-      <div className="container-global">
+    <div type="button" className="container-radio">
+      <div type="button" className="int-content">
+        <div className="container-animation">
+          <div className="animation">
+            <img
+              src="./Cassette.png"
+              alt="Cassette"
+              className="c1"
+              style={{
+                animation: audioPlaying ? "loop 2s linear infinite" : "none",
+              }}
+            />
+            <img
+              src="./Cassette2.png"
+              alt="Cassette2"
+              className="c2"
+              style={{
+                animation: audioPlaying ? "loop 2s linear infinite" : "none",
+              }}
+            />
+          </div>
+        </div>
+        <button
+          type="button"
+          onClick={() => closeModal(false)}
+          className="button"
+        >
+          X
+        </button>
+        {/* <img src={favicon}/>
+        <p>{name}</p> */}
         <div className="container-button">
           <div
             className="prevStation"
@@ -36,10 +66,6 @@ function RadioPlayer({
           >
             <img src="/suivant.png" alt="suivant" />
           </div>
-          {/* <div
-            className="btn" onclick={() => closeModal(false)}>
-            X
-          </div> */}
         </div>
       </div>
       {/* Lecteur audio caché */}
@@ -64,6 +90,7 @@ RadioPlayer.propTypes = {
   toggleAudio: PropTypes.func.isRequired,
   playNextStation: PropTypes.func.isRequired,
   playPreviousStation: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
 };
 
 export default RadioPlayer;

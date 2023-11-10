@@ -1,28 +1,68 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import SearchBar from "./SearchBar";
+import RadioPlayer from "./RadioPlayer";
+import FilterSection from "./FilterSection";
+// import Favorite from "./Favorite";
 
-function DisplayRadio({ radiosRandom }) {
-  const [searchValue, setSearchValue] = useState("");
-
+function DisplayRadio({
+  radiosRandom,
+  toggleAudio,
+  audioPlaying,
+  playNextStation,
+  playPreviousStation,
+  currentStationIndex,
+  setCurrentStationIndex,
+  isLoading,
+  searchValue,
+  setSearchValue,
+  styleSearchValue,
+  setStyleSearchValue,
+  countrySearchValue,
+  setCountrySearchValue
+}) {
+  
+  const [openModal, setOpenModal] = useState(false);
+  // const [favoriteRadiosRandom, setFavoriteRadiosRandom] = useState([]);
   return (
     <div className="container-display-radio">
-      <div className="search-feature">
-        <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
-      </div>
-      <div className="display_radios">
+      <FilterSection
+        styleSearchValue={styleSearchValue}
+        countrySearchValue={countrySearchValue}
+        setStyleSearchValue={setStyleSearchValue}
+        setCountrySearchValue={setCountrySearchValue}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
+      <div className={`display_radios ${!isLoading ? "loaded" : ""}`}>
         {radiosRandom &&
           radiosRandom
-            .filter((radio) =>
-              radio.name.toLowerCase().includes(searchValue.toLowerCase())
+            .filter(
+              (radio) =>
+                radio.name.toLowerCase().includes(searchValue.toLowerCase()) &&
+                radio.tags
+                  .toLowerCase()
+                  .includes(styleSearchValue.toLowerCase()) &&
+                radio.country
+                  .toLowerCase()
+                  .includes(countrySearchValue.toLowerCase())
             )
-            .map((station) => {
+            .map((station, selectedCurrentStationIndex) => {
               return (
-                <div className="space4">
+                <div className="space4" key={station.stationuuid}>
                   <div className="rond">
+                    {/* <Favorite
+                      radiosRandom={radiosRandom}
+                      favoriteRadiosRandom={favoriteRadiosRandom}
+                      setFavoriteRadiosRandom={setFavoriteRadiosRandom}
+                      setCurrentStationIndex={setCurrentStationIndex}
+                      selectedCurrentStationIndex={selectedCurrentStationIndex}
+                    /> */}
                     <button
+                      onClick={() => {
+                        setOpenModal(true);
+                        setCurrentStationIndex(selectedCurrentStationIndex);
+                      }}
                       type="button"
-                      key={station.stationuuid}
                       className="radio"
                     >
                       <img
@@ -37,6 +77,17 @@ function DisplayRadio({ radiosRandom }) {
               );
             })}
       </div>
+      {radiosRandom.length > 0 && openModal && (
+        <RadioPlayer
+          closeModal={setOpenModal}
+          stations={radiosRandom}
+          audioPlaying={audioPlaying}
+          currentStationIndex={currentStationIndex}
+          toggleAudio={toggleAudio}
+          playNextStation={playNextStation}
+          playPreviousStation={playPreviousStation}
+        />
+      )}
     </div>
   );
 }
@@ -47,8 +98,17 @@ DisplayRadio.propTypes = {
       stationuuid: PropTypes.string.isRequired,
       favicon: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
+      tags: PropTypes.string.isRequired,
+      country: PropTypes.string.isRequired,
     })
   ).isRequired,
+  audioPlaying: PropTypes.bool.isRequired,
+  currentStationIndex: PropTypes.number.isRequired,
+  toggleAudio: PropTypes.func.isRequired,
+  playNextStation: PropTypes.func.isRequired,
+  playPreviousStation: PropTypes.func.isRequired,
+  setCurrentStationIndex: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default DisplayRadio;

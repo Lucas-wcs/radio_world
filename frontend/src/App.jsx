@@ -3,19 +3,22 @@ import axios from "axios";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import DisplayRadio from "./components/DisplayRadio";
-import RadioPlayer from "./components/RadioPlayer";
 
 function App() {
   const [radiosRandom, setRadiosRandom] = useState([]);
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [currentStationIndex, setCurrentStationIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [searchValue, setSearchValue] = useState("");
+  const [styleSearchValue, setStyleSearchValue] = useState("");
+  const [countrySearchValue, setCountrySearchValue] = useState("");
 
   useEffect(() => {
     axios
-      .get("https://de1.api.radio-browser.info/json/stations?limit=100")
+      .get("https://de1.api.radio-browser.info/json/stations?limit=2500")
       .then((res) => {
         const tabRadios = [];
-        for (let i = 0; i < 16; i += 1) {
+        for (let i = 0; i < 200; i += 1) {
           const randomRadio =
             res.data[Math.floor(Math.random() * res.data.length)];
           if (
@@ -23,11 +26,14 @@ function App() {
             randomRadio.name !== "" &&
             randomRadio.stationuuid !== "" &&
             randomRadio.tags !== "" &&
-            randomRadio.country !== ""
+            randomRadio.country !== "" &&
+            randomRadio.codec === "MP3"
           ) {
+            const verifName = randomRadio.name;
             const verifUUID = randomRadio.stationuuid;
             if (
-              !tabRadios.find(({ stationuuid }) => stationuuid === verifUUID)
+              !tabRadios.find(({ stationuuid }) => stationuuid === verifUUID) &&
+              !tabRadios.find(({ name }) => name === verifName)
             ) {
               tabRadios.push(randomRadio);
             } else {
@@ -36,16 +42,22 @@ function App() {
           } else {
             i -= 1;
           }
-          setRadiosRandom(tabRadios);
         }
+        setRadiosRandom(tabRadios);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error(
+          "Erreur lors de la récupération des données de l'API.",
+          error
+        );
+        setIsLoading(false);
       });
   }, []);
 
   const toggleAudio = () => {
     setAudioPlaying(!audioPlaying);
   };
-
-  /* station suivante */
 
   const playNextStation = () => {
     if (currentStationIndex < radiosRandom.length - 1) {
@@ -56,8 +68,6 @@ function App() {
     setAudioPlaying(true);
   };
 
-  /* station précédente */
-
   const playPreviousStation = () => {
     if (currentStationIndex > 0) {
       setCurrentStationIndex(currentStationIndex - 1);
@@ -67,32 +77,51 @@ function App() {
     setAudioPlaying(true);
   };
 
-  /* Play-pause */
-
   useEffect(() => {
     const audioElement = document.getElementById("audioPlayer");
     if (audioElement) {
       audioElement.src = radiosRandom[currentStationIndex].url;
-      if (audioPlaying) {
-        audioElement.play();
-      }
+      audioElement.addEventListener("canplay", () => {
+        if (audioPlaying) {
+          audioElement.play();
+        } else {
+          audioElement.pause();
+        }
+      });
     }
   }, [currentStationIndex, audioPlaying]);
 
   return (
     <div className="main">
-      <NavBar />
-      <DisplayRadio radiosRandom={radiosRandom} />
-      {radiosRandom.length > 0 && (
-        <RadioPlayer
-          stations={radiosRandom}
+      <NavBar  setSearchValue={setSearchValue} setStyleSearchValue={setStyleSearchValue} setCountrySearchValue={setCountrySearchValue}/>
+      {isLoading && (
+        <div className="container-loading-logo">
+          <img
+            src="public\Radio_World.png"
+            alt="logo"
+            className="loadingLogo"
+          />
+        </div>
+      )}
+      <div>
+        <DisplayRadio
+          radiosRandom={radiosRandom}
+          toggleAudio={toggleAudio}
           audioPlaying={audioPlaying}
           currentStationIndex={currentStationIndex}
-          toggleAudio={toggleAudio}
-          playNextStation={playNextStation}
           playPreviousStation={playPreviousStation}
+          playNextStation={playNextStation}
+          setCurrentStationIndex={setCurrentStationIndex}
+          isLoading={isLoading}
+          searchValue={searchValue}  
+          styleSearchValue={styleSearchValue} 
+          countrySearchValue={countrySearchValue}
+          setSearchValue={setSearchValue} 
+          setStyleSearchValue={setStyleSearchValue} 
+          setCountrySearchValue={setCountrySearchValue} 
+          
         />
-      )}
+      </div>
       <Footer />
     </div>
   );

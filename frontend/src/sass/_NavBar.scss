@@ -5,32 +5,127 @@
   align-items: center;
   background-color: #c34e3a;
   box-shadow: 0px 8px 1px rgba(0, 0, 0, 0.232);
-  margin-bottom: 80px;
+  margin-bottom: 8px;
+  animation: slide-down 0.6s linear forwards;
+
+  @keyframes slide-down {
+    0% {
+      transform: translatey(-100%);
+    }
+    100% {
+      transform: translatey(0%);
+    }
+  }
 
   .favoriteButton {
     height: 50%;
   }
 
   .logoRW {
-    max-height: 100%;
+    height: 100px;
+    width: 150px;
+    animation-name: slideIn;
+    animation-duration: 2s;
+    animation-iteration-count: initial;
   }
 
   .logoRS {
     height: 100%;
+    animation-name: slideIn;
+    animation-duration: 2s;
+    animation-iteration-count: initial;
+    display: flex;
+    padding-right: 10px;
+    align-items: center;
+    justify-content: center;
 
-    .logoRS1 {
-      height: 50%;
+    @keyframes slideIn {
+      // 0% {
+      //   transform: translate(-1000px, 0px);
+      // }
+      // 100% {
+      //   transform: translate(0px, 0px);
+      // }
     }
 
-    .logoRS2 {
-      height: 50%;
+    .RS1 {
+      width: 116px;
+      height: 50px;
+      display: flex;
+      justify-content: right;
+    }
+    .RS2 {
+      width: 116px;
+      height: 50px;
+      display: flex;
+      justify-content: left;
     }
 
     img {
       height: 100%;
-      width: 50%;
-      padding: 2px;
-      padding-right: 5px;
+      padding: 5px;
     }
+  }
+}
+
+.search-feature {
+  display: flex;
+  gap: 1em;
+  height: 3.5rem;
+  }
+  
+
+
+@media screen and (max-width: 768px) {
+  .container-logo {
+    flex: 1;
+    margin-right: 9%;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .navbar {
+    box-shadow: none;
+    margin-bottom: 43px;
+
+    .logoRW {
+      height: 100px;
+      width: 150px;
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .container-logo {
+    margin-right: 8%;
+  }
+  .navbar {
+    box-shadow: none;
+    margin-bottom: 43px;
+    .logoRS {
+      flex-direction: column;
+      justify-content: center;
+      padding-right: 0px;
+
+      .RS1 {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+      }
+      .RS2 {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+      }
+
+      img {
+        height: 80%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .container-logo {
+    margin-right: 2%;
   }
 }
