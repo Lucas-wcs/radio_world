@@ -15,7 +15,7 @@ function NavBar() {
         className="favoriteButton"
         alt="favoriteButton"
       /> */}
-      <div className="logoRS">
+      {/* <div className="logoRS">
         <div className="RS1">
           <img src="/twitter.png" alt="Twitter logo" />
           <img src="/instagram.png" alt="Insta logo" />
@@ -24,7 +24,7 @@ function NavBar() {
           <img src="/Facebook.png" alt="Fb logo" />
           <img src="/courrier.png" alt="Contact logo" className="courrier" />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

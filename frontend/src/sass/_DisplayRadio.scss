@@ -126,10 +126,13 @@
 }
 
 .search-feature {
-  position: absolute;
-  top: 3%;
-  left: 50%;
-  transform: translateX(-50%);
+  display: flex;
+  margin-bottom: 2vh;
+  justify-content: center;
+  position: relative;
+  top: -9rem;
+  // left: 50%;
+  // transform: translateX(-50%);
 }
 
 @media screen and (max-width: 1024px) {
