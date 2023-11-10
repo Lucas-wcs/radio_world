@@ -3,7 +3,7 @@ import { useState } from "react";
 function Clock() {
   const time = new Date().toLocaleTimeString();
   const [currentTime, setCurrentTime] = useState(time);
-
+  
   const updateTime = () => {
     const time2 = new Date().toLocaleTimeString();
     setCurrentTime(time2);
