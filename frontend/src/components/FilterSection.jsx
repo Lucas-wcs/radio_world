@@ -1,15 +1,12 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-// TODO: refactor to use the API from an external file
-// import { getCountryData } from "../services/countryData";
-// import { getStyleData } from "../services/styleData";
 
-function FilterSection({ setStyleSearchValue, setCountrySearchValue }) {
+
+function FilterSection({ searchValue, setSearchValue, setStyleSearchValue, setCountrySearchValue }) {
   const [filterCriteriaButton, setFilterCriteriaButton] = useState(0);
   const [dataCountry, setDataCountry] = useState([]);
   const [dataStyle, setDataStyle] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
 
   function handleSearchBarChange(event) {
     setSearchValue(event.target.value);
@@ -140,6 +137,8 @@ function FilterSection({ setStyleSearchValue, setCountrySearchValue }) {
 FilterSection.propTypes = {
   setStyleSearchValue: PropTypes.func.isRequired,
   setCountrySearchValue: PropTypes.func.isRequired,
+  setSearchValue: PropTypes.func.isRequired,
+  searchValue: PropTypes.string.isRequired,
 };
 
 export default FilterSection;

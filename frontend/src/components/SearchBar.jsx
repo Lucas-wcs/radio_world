@@ -1,5 +1,4 @@
-import propTypes from "prop-types";
-import "../sass/_searchBar.scss";
+import PropTypes from "prop-types";
 
 function SearchBar({ searchValue, setSearchValue }) {
   function handleSearchBarChange(event) {
@@ -8,7 +7,7 @@ function SearchBar({ searchValue, setSearchValue }) {
 
   return (
     <div className="container-search-bar">
-      <div className="search-bar">
+      <div className="search-bar">       
         <input
           className="search-bar__input"
           type="search"
@@ -23,8 +22,8 @@ function SearchBar({ searchValue, setSearchValue }) {
 }
 
 SearchBar.propTypes = {
-  searchValue: propTypes.string.isRequired,
-  setSearchValue: propTypes.func.isRequired,
+  searchValue: PropTypes.string.isRequired,
+  setSearchValue: PropTypes.func.isRequired,
 };
 
 export default SearchBar;
