@@ -1,31 +1,27 @@
 .display_radios.loaded {
   opacity: 1;
   transition: opacity 1s;
-  overflow: auto;  
-  height:70vh;
+  overflow: auto;
+  height: 70vh;
   margin-inline: 10px;
-  
 
   .container-display-radio {
     height: 100%;
   }
 }
 
-.display_radios.loaded::-webkit-scrollbar-track
-{
-	border-radius: 10px;
+.display_radios.loaded::-webkit-scrollbar-track {
+  border-radius: 10px;
 }
 
-.display_radios.loaded::-webkit-scrollbar
-{
-	width: 15px;
+.display_radios.loaded::-webkit-scrollbar {
+  width: 15px;
 }
 
-.display_radios.loaded::-webkit-scrollbar-thumb
-{
-	border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: black;
+.display_radios.loaded::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: black;
   height: 100px;
 }
 
@@ -36,10 +32,10 @@
   align-items: center;
   justify-content: space-around;
   opacity: 0;
- 
+
   .space4 {
     width: 20%;
-    height:50%;
+    height: 50%;
     display: flex;
     justify-content: center;
   }
@@ -60,7 +56,6 @@
       6px 6px 12px #fae7a75b,
       -6px -6px 12px #fae7a75b;
     cursor: pointer;
-
   }
 
   button:active {
@@ -78,6 +73,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 220px;
+    position: relative;
 
     p {
       font-family: "Montserrat", sans-serif;
@@ -90,6 +86,18 @@
 
     .favicon {
       width: 70px;
+    }
+
+    .favorite {
+      position: absolute;
+      transform: translate(200%, -200%);
+      z-index: 1;
+      background: none;
+      border: none;
+      img {
+        height: 35px;
+        width: 35px;
+      }
     }
   }
 }
