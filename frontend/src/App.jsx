@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("https://de1.api.radio-browser.info/json/stations?limit=4000")
+      .get("https://de1.api.radio-browser.info/json/stations?limit=2500")
       .then((res) => {
         const tabRadios = [];
         for (let i = 0; i < 200; i += 1) {
@@ -78,7 +78,6 @@ function App() {
     const audioElement = document.getElementById("audioPlayer");
     if (audioElement) {
       audioElement.src = radiosRandom[currentStationIndex].url;
-
       audioElement.addEventListener("canplay", () => {
         if (audioPlaying) {
           audioElement.play();
@@ -93,7 +92,7 @@ function App() {
     <div className="main">
       <NavBar />
       {isLoading && (
-        <div>
+        <div className="container-loading-logo">
           <img
             src="public\Radio_World.png"
             alt="logo"

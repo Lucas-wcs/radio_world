@@ -6,7 +6,14 @@
   align-items: center;
   gap: 1rem;
   border-radius: 1rem;
+  background-color: var(--secondary-color-fade-1);
+
+  // *
+
+  // ? My CSS
+
   background-color: var(--secondary-color-fade-3);
+
   max-height: 50rem;
   position: absolute;
   top: 50%;
@@ -25,7 +32,7 @@
       transform: translate(-50%, -50%) scale(1);
     }
   }
-  
+
   .close-icon-wrapper {
     width: fit-content;
     height: fit-content;
@@ -34,7 +41,7 @@
     cursor: pointer;
     border: none;
     background-color: transparent;
-    
+
     img {
       width: 2rem;
       aspect-ratio: 1/1;
@@ -47,7 +54,7 @@
     border-radius: 1rem;
     width: calc(100% - 10rem);
     min-height: 4rem;
-    
+
     .filter-criteria {
       display: flex;
       width: calc(100% / 2);
@@ -63,13 +70,13 @@
       text-align: center;
       font-weight: 600;
     }
-    
+
     .filter-criteria:first-child {
       border-right: 1px solid var(--neutral-color);
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
-    
+
     .filter-criteria:last-child {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
@@ -99,7 +106,7 @@
     align-items: center;
     gap: 1rem;
     margin: 1rem 0;
-    
+
     input {
       flex: 1;
       display: flex;
@@ -111,11 +118,10 @@
     }
   }
 
-
   .filter-section-search-bar input:focus {
     outline: none;
   }
-  
+
   .filter-options-wrapper {
     overflow-y: scroll;
     .options {
@@ -194,3 +200,6 @@
   }
 }
 
+
+@media screen and (max-width: 360px) {
+}

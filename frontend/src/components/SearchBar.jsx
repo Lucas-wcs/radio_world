@@ -7,15 +7,17 @@ function SearchBar({ searchValue, setSearchValue }) {
   }
 
   return (
-    <div className="search-bar">
-      <input
-        className="search-bar__input"
-        type="search"
-        name="search-bar"
-        placeholder="Search for a radio station by name"
-        value={searchValue}
-        onChange={handleSearchBarChange}
-      />
+    <div className="container-search-bar">
+      <div className="search-bar">
+        <input
+          className="search-bar__input"
+          type="search"
+          name="search-bar"
+          placeholder="Search for a radio station by name"
+          value={searchValue}
+          onChange={handleSearchBarChange}
+        />
+      </div>
     </div>
   );
 }
