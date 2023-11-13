@@ -5,9 +5,9 @@ import FilterButton from "./FilterButton";
 function NavBar({
   searchValue,
   setSearchValue,
-  styleSearchValue,
-  countrySearchValue,
   radiosRandom,
+  isVisible,
+  setIsVisible,
 }) {
   return (
     <div className="navbar">
@@ -30,25 +30,12 @@ function NavBar({
             radiosRandom={radiosRandom}
             searchValue={searchValue}
             setSearchValue={setSearchValue}
-            styleSearchValue={styleSearchValue}
-            countrySearchValue={countrySearchValue}
           />
         </div>
         <div className="container-filter">
-          <FilterButton />
+          <FilterButton isVisible={isVisible} setIsVisible={setIsVisible} />
         </div>
       </div>
-      {/*
-      <div className="logoRS">
-        <div className="RS1">
-          <img src="/twitter.png" alt="Twitter logo" />
-          <img src="/instagram.png" alt="Insta logo" />
-        </div>
-        <div className="RS2">
-          <img src="/Facebook.png" alt="Fb logo" />
-          <img src="/courrier.png" alt="Contact logo" className="courrier" />
-        </div>
-      </div> */}
     </div>
   );
 }
@@ -56,8 +43,6 @@ function NavBar({
 NavBar.propTypes = {
   searchValue: PropTypes.string.isRequired,
   setSearchValue: PropTypes.func.isRequired,
-  styleSearchValue: PropTypes.string.isRequired,
-  countrySearchValue: PropTypes.string.isRequired,
   radiosRandom: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -67,6 +52,8 @@ NavBar.propTypes = {
       country: PropTypes.string.isRequired,
     })
   ).isRequired,
+  isVisible: PropTypes.number.isRequired,
+  setIsVisible: PropTypes.func.isRequired,
 };
 
 export default NavBar;

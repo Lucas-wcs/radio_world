@@ -12,6 +12,7 @@ function App() {
   const [searchValue, setSearchValue] = useState("");
   const [styleSearchValue, setStyleSearchValue] = useState("");
   const [countrySearchValue, setCountrySearchValue] = useState("");
+  const [isVisible, setIsVisible] = useState(0);
 
   useEffect(() => {
     axios
@@ -97,6 +98,8 @@ function App() {
         setSearchValue={setSearchValue}
         setStyleSearchValue={setStyleSearchValue}
         setCountrySearchValue={setCountrySearchValue}
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
       />
       {isLoading && (
         <div className="container-loading-logo">
@@ -123,6 +126,8 @@ function App() {
           setSearchValue={setSearchValue}
           setStyleSearchValue={setStyleSearchValue}
           setCountrySearchValue={setCountrySearchValue}
+          isVisible={isVisible}
+          setIsVisible={setIsVisible}
         />
       </div>
       <Footer />

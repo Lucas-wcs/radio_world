@@ -1,17 +1,12 @@
 import axios from "axios";
 
-const BASE_URL =
-  "https://de1.api.radio-browser.info/json/countries?order=name&limit=10";
+const BASE_URL = "https://de1.api.radio-browser.info/json/countries";
 
-const getCountryData = async () => {
-  try {
-    const response = await axios.get(BASE_URL);
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
+async function getDataCountry() {
+  return axios
+    .get(BASE_URL)
+    .then((response) => response.data)
+    .catch((error) => console.error(error));
+}
 
-export default getCountryData;
-export { getCountryData };
+export default getDataCountry;

@@ -1,4 +1,5 @@
 .container-search-bar {
+  height: 100%;
   display: flex;
   justify-content: center;
   position: relative;
@@ -6,14 +7,18 @@
   z-index: 20;
 }
 
+.container-search-bar .search-bar {
+  height: 100%;
+}
+
 .search-bar__input {
+  height: 100%;
   background-color: #fae7a7;
   flex: 1;
   display: flex;
   padding: 0.5rem 1rem;
   border-radius: 1rem;
   border: 1px solid var(--secondary-color);
-  height: 30px;
   width: 500px;
   animation: slide-down 0.6s linear forwards;
   transform: translateY(-200%);
@@ -37,32 +42,32 @@
   outline: none;
 }
 
-@media screen and (max-width: 1024px) {
-  .search-bar__input {
-    margin-top: 13px;
-  }
-}
+// @media screen and (max-width: 1024px) {
+//   .search-bar__input {
+//     margin-top: 13px;
+//   }
+// }
 
-@media screen and (max-width: 768px) {
-  .container-search-bar {
-    width: 100vw;
-    height: 5vh;
-    align-items: center;
-    top: 85px;
-    background-color: rgba(255, 255, 255, 0.459);
+// @media screen and (max-width: 768px) {
+//   .container-search-bar {
+//     width: 100vw;
+//     height: 5vh;
+//     align-items: center;
+//     top: 85px;
+//     background-color: rgba(255, 255, 255, 0.459);
 
-    .search-bar__input {
-      margin-top: 0;
-      margin-left: -30%;
-      width: 160%;
-    }
-  }
-}
+//     .search-bar__input {
+//       margin-top: 0;
+//       margin-left: -30%;
+//       width: 160%;
+//     }
+//   }
+// }
 
-@media screen and (max-width: 425px) {
-  .search-bar__input {
-    margin-top: 50%;
-    width: 150%;
-    margin-left: -25%;
-  }
-}
+// @media screen and (max-width: 425px) {
+//   .search-bar__input {
+//     margin-top: 50%;
+//     width: 150%;
+//     margin-left: -25%;
+//   }
+// }

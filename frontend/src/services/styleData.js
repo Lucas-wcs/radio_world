@@ -1,17 +1,12 @@
 import axios from "axios";
 
-const BASE_URL =
-  "https://de1.api.radio-browser.info/json/tags?order=name&limit=10";
+const BASE_URL = "https://de1.api.radio-browser.info/json/tags";
 
-const getStyleData = async () => {
-  try {
-    const response = await axios.get(BASE_URL);
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
+async function getStyleData() {
+  return axios
+    .get(BASE_URL)
+    .then((response) => response.data)
+    .catch((error) => console.error(error));
+}
 
 export default getStyleData;
-export { getStyleData };

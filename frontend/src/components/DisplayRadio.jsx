@@ -19,6 +19,8 @@ function DisplayRadio({
   setStyleSearchValue,
   countrySearchValue,
   setCountrySearchValue,
+  isVisible,
+  setIsVisible,
 }) {
   const [openModal, setOpenModal] = useState(false);
   // const [favoriteRadiosRandom, setFavoriteRadiosRandom] = useState([]);
@@ -31,21 +33,19 @@ function DisplayRadio({
         setCountrySearchValue={setCountrySearchValue}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
       />
       <div className={`display_radios ${!isLoading ? "loaded" : ""}`}>
-        {radiosRandom &&
+        {radiosRandom.filter((radio) =>
+          radio.name.toLowerCase().includes(searchValue.toLowerCase())
+        ).length === 0 ? (
+          <p className="no-results">No results found.</p>
+        ) : (
+          radiosRandom &&
           radiosRandom
             .filter((radio) =>
               radio.name.toLowerCase().includes(searchValue.toLowerCase())
-            )
-            .filter(
-              (radio) =>
-                radio.tags
-                  .toLowerCase()
-                  .includes(styleSearchValue.toLowerCase()) &&
-                radio.country
-                  .toLowerCase()
-                  .includes(countrySearchValue.toLowerCase())
             )
             .map((station, selectedCurrentStationIndex) => {
               return (
@@ -76,7 +76,8 @@ function DisplayRadio({
                   </div>
                 </div>
               );
-            })}
+            })
+        )}
       </div>
       {radiosRandom.length > 0 && openModal && (
         <RadioPlayer
@@ -116,6 +117,8 @@ DisplayRadio.propTypes = {
   setStyleSearchValue: PropTypes.func.isRequired,
   countrySearchValue: PropTypes.string.isRequired,
   setCountrySearchValue: PropTypes.func.isRequired,
+  isVisible: PropTypes.number.isRequired,
+  setIsVisible: PropTypes.func.isRequired,
 };
 
 export default DisplayRadio;

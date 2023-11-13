@@ -8,10 +8,6 @@
   border-radius: 1rem;
   background-color: var(--secondary-color-fade-1);
 
-  // *
-
-  // ? My CSS
-
   background-color: var(--secondary-color-fade-3);
 
   max-height: 50rem;
@@ -20,7 +16,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
-  animation: appear 0.5s ease-in-out forwards;
+  animation: appear 0.3s ease-in-out forwards;
 
   @keyframes appear {
     0% {
@@ -47,6 +43,7 @@
       aspect-ratio: 1/1;
     }
   }
+
   .filter-criteria-wrapper {
     display: flex;
     justify-content: center;
@@ -85,7 +82,7 @@
     .is-active {
       background-color: var(--neutral-color);
       color: var(--secondary-color);
-      animation: highlight 0.5s ease-in-out forwards;
+      animation: highlight 0.3s ease-in-out forwards;
 
       @keyframes highlight {
         0% {
@@ -123,7 +120,20 @@
   }
 
   .filter-options-wrapper {
+    flex: auto;
     overflow-y: scroll;
+    height: 28rem;
+    width: 100%;
+    animation: appear 0.3s ease-in-out forwards;
+
+    @keyframes appear {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
     .options {
       display: flex;
       padding: 0 2rem 1rem 2rem;
@@ -161,11 +171,23 @@
 
       .option:hover {
         background-color: var(--neutral-color-fade-2);
+        color: var(--secondary-color);
       }
 
-      .is-active {
-        background-color: inherit;
+      .option.is-active {
+        background-color: var(--neutral-color);
+        color: var(--secondary-color);
       }
+    }
+
+    .no-results {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      font-size: calc(1rem * 3);
+      font-weight: 600;
+      color: var(--neutral-color);
     }
   }
   .filter-options-wrapper::-webkit-scrollbar {
@@ -180,6 +202,8 @@
   }
 
   .reset-button-wrapper {
+    display: flex;
+    gap: 1rem;
     .reset-button {
       display: flex;
       justify-content: center;
@@ -200,6 +224,9 @@
   }
 }
 
+.is-visible {
+  display: flex;
+}
 
 @media screen and (max-width: 360px) {
 }
