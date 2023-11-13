@@ -37,8 +37,13 @@ function DisplayRadio({
         setIsVisible={setIsVisible}
       />
       <div className={`display_radios ${!isLoading ? "loaded" : ""}`}>
-        {radiosRandom.filter((radio) =>
-          radio.name.toLowerCase().includes(searchValue.toLowerCase())
+        {radiosRandom.filter(
+          (radio) =>
+            radio.name.toLowerCase().includes(searchValue.toLowerCase()) &&
+            radio.tags.toLowerCase().includes(styleSearchValue.toLowerCase()) &&
+            radio.country
+              .toLowerCase()
+              .includes(countrySearchValue.toLowerCase())
         ).length === 0 ? (
           <p className="no-results">No results found.</p>
         ) : (

@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import getDataCountry from "../services/countryData";
@@ -126,45 +125,46 @@ function FilterSection({
             : element.name.toLowerCase().includes(inputValue2.toLowerCase())
         ).length === 0
           ? noResultsMessage
-          : filterCriteriaButton
-          ? dataCountry
-              .filter((country) =>
-                country.name.toLowerCase().includes(inputValue1.toLowerCase())
-              )
-              .map((country) => (
-                <div key={dataCountry.indexOf(country)} className="options">
-                  <button
-                    onClick={handleClickOnOptionButton}
-                    type="button"
-                    className={`option${
-                      isActive1 === dataCountry.indexOf(country)
-                        ? " is-active"
-                        : ""
-                    }`}
-                    value={dataCountry.indexOf(country)}
-                  >
-                    {country.name}
-                  </button>
-                </div>
-              ))
-          : dataStyle
-              .filter((tag) =>
-                tag.name.toLowerCase().includes(inputValue2.toLowerCase())
-              )
-              .map((tag) => (
-                <div key={dataStyle.indexOf(tag)} className="options">
-                  <button
-                    onClick={handleClickOnOptionButton}
-                    type="button"
-                    className={`option${
-                      isActive2 === dataStyle.indexOf(tag) ? " is-active" : ""
-                    }`}
-                    value={dataStyle.indexOf(tag)}
-                  >
-                    {tag.name}
-                  </button>
-                </div>
-              ))}
+          : (filterCriteriaButton &&
+              dataCountry
+                .filter((country) =>
+                  country.name.toLowerCase().includes(inputValue1.toLowerCase())
+                )
+                .map((country) => (
+                  <div key={dataCountry.indexOf(country)} className="options">
+                    <button
+                      onClick={handleClickOnOptionButton}
+                      type="button"
+                      className={`option${
+                        isActive1 === dataCountry.indexOf(country)
+                          ? " is-active"
+                          : ""
+                      }`}
+                      value={dataCountry.indexOf(country)}
+                    >
+                      {country.name}
+                    </button>
+                  </div>
+                ))) ||
+            (!filterCriteriaButton &&
+              dataStyle
+                .filter((tag) =>
+                  tag.name.toLowerCase().includes(inputValue2.toLowerCase())
+                )
+                .map((tag) => (
+                  <div key={dataStyle.indexOf(tag)} className="options">
+                    <button
+                      onClick={handleClickOnOptionButton}
+                      type="button"
+                      className={`option${
+                        isActive2 === dataStyle.indexOf(tag) ? " is-active" : ""
+                      }`}
+                      value={dataStyle.indexOf(tag)}
+                    >
+                      {tag.name}
+                    </button>
+                  </div>
+                )))}
       </div>
       <div className="reset-button-wrapper">
         <button
