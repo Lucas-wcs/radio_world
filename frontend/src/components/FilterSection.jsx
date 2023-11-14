@@ -120,11 +120,11 @@ function FilterSection({
         />
       </div>
       <div className="filter-options-wrapper">
-        {(filterCriteriaButton ? dataCountry : dataStyle).filter((element) =>
+        {!(filterCriteriaButton ? dataCountry : dataStyle).filter((element) =>
           filterCriteriaButton
             ? element.name.toLowerCase().includes(inputValue1.toLowerCase())
             : element.name.toLowerCase().includes(inputValue2.toLowerCase())
-        ).length === 0
+        ).length
           ? noResultsMessage
           : filterCriteriaButton
           ? dataCountry

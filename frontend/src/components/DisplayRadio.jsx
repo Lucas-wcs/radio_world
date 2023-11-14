@@ -49,8 +49,15 @@ function DisplayRadio({
         ) : (
           radiosRandom &&
           radiosRandom
-            .filter((radio) =>
-              radio.name.toLowerCase().includes(searchValue.toLowerCase())
+            .filter(
+              (radio) =>
+                radio.name.toLowerCase().includes(searchValue.toLowerCase()) &&
+                radio.tags
+                  .toLowerCase()
+                  .includes(styleSearchValue.toLowerCase()) &&
+                radio.country
+                  .toLowerCase()
+                  .includes(countrySearchValue.toLowerCase())
             )
             .map((station, selectedCurrentStationIndex) => {
               return (
