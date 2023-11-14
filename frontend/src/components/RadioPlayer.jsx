@@ -11,6 +11,8 @@ function RadioPlayer({
   playPreviousStation,
   closeModal,
 }) {
+  const currentStation = stations[currentStationIndex];
+
   return (
     <div type="button" className="container-radio">
       <div type="button" className="int-content">
@@ -67,6 +69,9 @@ function RadioPlayer({
             <img src="/suivant.png" alt="suivant" />
           </div>
         </div>
+        <div className="radio-selection">
+          <p>{currentStation.name}</p>
+        </div>
       </div>
       {/* Lecteur audio caché */}
       <audio
@@ -83,7 +88,10 @@ function RadioPlayer({
 
 RadioPlayer.propTypes = {
   stations: PropTypes.arrayOf(
-    PropTypes.shape({ url: PropTypes.string.isRequired })
+    PropTypes.shape({
+      url: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    })
   ).isRequired,
   audioPlaying: PropTypes.bool.isRequired,
   currentStationIndex: PropTypes.number.isRequired,
