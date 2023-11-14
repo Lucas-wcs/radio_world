@@ -40,13 +40,8 @@ function NavBar({
   );
 }
 
-NavBar.defaultProps = {
-  searchValue: "",
-  radiosRandom: [],
-};
-
 NavBar.propTypes = {
-  searchValue: PropTypes.string,
+  searchValue: PropTypes.string.isRequired,
   setSearchValue: PropTypes.func.isRequired,
   radiosRandom: PropTypes.arrayOf(
     PropTypes.shape({
@@ -56,7 +51,7 @@ NavBar.propTypes = {
       tags: PropTypes.string.isRequired,
       country: PropTypes.string.isRequired,
     })
-  ),
+  ).isRequired,
   isVisible: PropTypes.number.isRequired,
   setIsVisible: PropTypes.func.isRequired,
 };
