@@ -122,14 +122,14 @@ function FilterSection({
       <div className="filter-options-wrapper">
         {!(filterCriteriaButton ? dataCountry : dataStyle).filter((element) =>
           filterCriteriaButton
-            ? element.name.toLowerCase().includes(inputValue1.toLowerCase())
-            : element.name.toLowerCase().includes(inputValue2.toLowerCase())
+            ? element.name.toLowerCase().startsWith(inputValue1.toLowerCase())
+            : element.name.toLowerCase().startsWith(inputValue2.toLowerCase())
         ).length
           ? noResultsMessage
           : filterCriteriaButton
           ? dataCountry
               .filter((country) =>
-                country.name.toLowerCase().includes(inputValue1.toLowerCase())
+                country.name.toLowerCase().startsWith(inputValue1.toLowerCase())
               )
               .map((country) => (
                 <div key={dataCountry.indexOf(country)} className="options">
@@ -149,7 +149,7 @@ function FilterSection({
               ))
           : dataStyle
               .filter((tag) =>
-                tag.name.toLowerCase().includes(inputValue2.toLowerCase())
+                tag.name.toLowerCase().startsWith(inputValue2.toLowerCase())
               )
               .map((tag) => (
                 <div key={dataStyle.indexOf(tag)} className="options">
@@ -172,9 +172,7 @@ function FilterSection({
           className="reset-button"
           onClick={handleClickOnCriteriaResetButton}
         >
-          {filterCriteriaButton
-            ? "Reset country filters"
-            : "Reset style filters"}
+          {filterCriteriaButton ? "Reset country filter" : "Reset style filter"}
         </button>
         <button
           type="button"
