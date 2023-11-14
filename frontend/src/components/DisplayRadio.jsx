@@ -18,9 +18,10 @@ function DisplayRadio({
   styleSearchValue,
   setStyleSearchValue,
   countrySearchValue,
-  setCountrySearchValue
+  setCountrySearchValue,
+  isVisible,
+  setIsVisible,
 }) {
-  
   const [openModal, setOpenModal] = useState(false);
   // const [favoriteRadiosRandom, setFavoriteRadiosRandom] = useState([]);
   return (
@@ -32,9 +33,21 @@ function DisplayRadio({
         setCountrySearchValue={setCountrySearchValue}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
       />
       <div className={`display_radios ${!isLoading ? "loaded" : ""}`}>
-        {radiosRandom &&
+        {radiosRandom.filter(
+          (radio) =>
+            radio.name.toLowerCase().includes(searchValue.toLowerCase()) &&
+            radio.tags.toLowerCase().includes(styleSearchValue.toLowerCase()) &&
+            radio.country
+              .toLowerCase()
+              .includes(countrySearchValue.toLowerCase())
+        ).length === 0 ? (
+          <p className="no-results">No results found.</p>
+        ) : (
+          radiosRandom &&
           radiosRandom
             .filter(
               (radio) =>
@@ -75,7 +88,8 @@ function DisplayRadio({
                   </div>
                 </div>
               );
-            })}
+            })
+        )}
       </div>
       {radiosRandom.length > 0 && openModal && (
         <RadioPlayer
@@ -109,6 +123,14 @@ DisplayRadio.propTypes = {
   playPreviousStation: PropTypes.func.isRequired,
   setCurrentStationIndex: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  searchValue: PropTypes.string.isRequired,
+  setSearchValue: PropTypes.func.isRequired,
+  styleSearchValue: PropTypes.string.isRequired,
+  setStyleSearchValue: PropTypes.func.isRequired,
+  countrySearchValue: PropTypes.string.isRequired,
+  setCountrySearchValue: PropTypes.func.isRequired,
+  isVisible: PropTypes.number.isRequired,
+  setIsVisible: PropTypes.func.isRequired,
 };
 
 export default DisplayRadio;

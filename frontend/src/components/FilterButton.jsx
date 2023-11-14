@@ -1,22 +1,28 @@
-function FilterButton() {
-  // function makeFilterSectionAppear(e) {
-  //   e.target.style.display = "flex";
-  // }
-  function makeFilterSectionAppear() {
-    const filterSection = document.querySelector(".filter-section");
-    filterSection.style.display = "flex";
+import PropTypes from "prop-types";
+
+function FilterButton({ isVisible, setIsVisible }) {
+  function handleClickOnFilterButton() {
+    if (!isVisible) {
+      setIsVisible(1);
+    }
   }
 
   return (
     <button
-      onClick={makeFilterSectionAppear}
+      onClick={handleClickOnFilterButton}
       type="button"
       className="filter-button"
+      value={isVisible}
     >
       Filter
       <img src="/src/assets/filterIcon.png" alt="Filter icon" />
     </button>
   );
 }
+
+FilterButton.propTypes = {
+  isVisible: PropTypes.number.isRequired,
+  setIsVisible: PropTypes.func.isRequired,
+};
 
 export default FilterButton;

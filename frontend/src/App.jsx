@@ -12,13 +12,14 @@ function App() {
   const [searchValue, setSearchValue] = useState("");
   const [styleSearchValue, setStyleSearchValue] = useState("");
   const [countrySearchValue, setCountrySearchValue] = useState("");
+  const [isVisible, setIsVisible] = useState(0);
 
   useEffect(() => {
     axios
-      .get("https://de1.api.radio-browser.info/json/stations?limit=2500")
+      .get("https://de1.api.radio-browser.info/json/stations?limit=500")
       .then((res) => {
         const tabRadios = [];
-        for (let i = 0; i < 200; i += 1) {
+        for (let i = 0; i < 50; i += 1) {
           const randomRadio =
             res.data[Math.floor(Math.random() * res.data.length)];
           if (
@@ -93,7 +94,13 @@ function App() {
 
   return (
     <div className="main">
-      <NavBar  setSearchValue={setSearchValue} setStyleSearchValue={setStyleSearchValue} setCountrySearchValue={setCountrySearchValue}/>
+      <NavBar
+        setSearchValue={setSearchValue}
+        setStyleSearchValue={setStyleSearchValue}
+        setCountrySearchValue={setCountrySearchValue}
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
+      />
       {isLoading && (
         <div className="container-loading-logo">
           <img
@@ -113,13 +120,14 @@ function App() {
           playNextStation={playNextStation}
           setCurrentStationIndex={setCurrentStationIndex}
           isLoading={isLoading}
-          searchValue={searchValue}  
-          styleSearchValue={styleSearchValue} 
+          searchValue={searchValue}
+          styleSearchValue={styleSearchValue}
           countrySearchValue={countrySearchValue}
-          setSearchValue={setSearchValue} 
-          setStyleSearchValue={setStyleSearchValue} 
-          setCountrySearchValue={setCountrySearchValue} 
-          
+          setSearchValue={setSearchValue}
+          setStyleSearchValue={setStyleSearchValue}
+          setCountrySearchValue={setCountrySearchValue}
+          isVisible={isVisible}
+          setIsVisible={setIsVisible}
         />
       </div>
       <Footer />
