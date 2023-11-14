@@ -16,10 +16,10 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("https://de1.api.radio-browser.info/json/stations?limit=500")
+      .get("https://de1.api.radio-browser.info/json/stations?limit=2000")
       .then((res) => {
         const tabRadios = [];
-        for (let i = 0; i < 50; i += 1) {
+        for (let i = 0; i < 500; i += 1) {
           const randomRadio =
             res.data[Math.floor(Math.random() * res.data.length)];
           if (
