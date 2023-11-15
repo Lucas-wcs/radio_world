@@ -70,6 +70,9 @@ function RadioPlayer({
           </div>
         </div>
         <div className="radio-selection">
+          <div className="radio-selection-favicon">
+            <img src={currentStation.favicon} alt="favicon" />
+          </div>
           <p>{currentStation.name}</p>
         </div>
       </div>
@@ -91,6 +94,7 @@ RadioPlayer.propTypes = {
     PropTypes.shape({
       url: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
+      favicon: PropTypes.string.isRequired,
     })
   ).isRequired,
   audioPlaying: PropTypes.bool.isRequired,
