@@ -17,3 +17,9 @@
     height: auto;
   }
 }
+
+@media screen and (max-width: 425px) {
+  .filter-button {
+    height: 85%;
+  }
+}
