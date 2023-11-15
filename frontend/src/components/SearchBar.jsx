@@ -7,7 +7,7 @@ function SearchBar({ searchValue, setSearchValue }) {
 
   return (
     <div className="container-search-bar">
-      <div className="search-bar">       
+      <div className="search-bar">
         <input
           className="search-bar__input"
           type="search"

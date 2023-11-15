@@ -93,7 +93,11 @@ function App() {
 
   return (
     <div className="main">
-      <NavBar  setSearchValue={setSearchValue} setStyleSearchValue={setStyleSearchValue} setCountrySearchValue={setCountrySearchValue}/>
+      <NavBar
+        setSearchValue={setSearchValue}
+        setStyleSearchValue={setStyleSearchValue}
+        setCountrySearchValue={setCountrySearchValue}
+      />
       {isLoading && (
         <div className="container-loading-logo">
           <img
@@ -113,13 +117,12 @@ function App() {
           playNextStation={playNextStation}
           setCurrentStationIndex={setCurrentStationIndex}
           isLoading={isLoading}
-          searchValue={searchValue}  
-          styleSearchValue={styleSearchValue} 
+          searchValue={searchValue}
+          styleSearchValue={styleSearchValue}
           countrySearchValue={countrySearchValue}
-          setSearchValue={setSearchValue} 
-          setStyleSearchValue={setStyleSearchValue} 
-          setCountrySearchValue={setCountrySearchValue} 
-          
+          setSearchValue={setSearchValue}
+          setStyleSearchValue={setStyleSearchValue}
+          setCountrySearchValue={setCountrySearchValue}
         />
       </div>
       <Footer />

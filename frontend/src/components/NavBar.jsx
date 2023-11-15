@@ -1,8 +1,17 @@
+/* eslint-disable import/order */
+
 import React from "react";
+import PropTypes from "prop-types";
 import SearchBar from "./SearchBar";
 import FilterButton from "./FilterButton";
 
-function NavBar({searchValue, setSearchValue, styleSearchValue, countrySearchValue, radiosRandom}) {
+function NavBar({
+  searchValue,
+  setSearchValue,
+  styleSearchValue,
+  countrySearchValue,
+  radiosRandom,
+}) {
   return (
     <div className="navbar">
       <div className="container-logo">
@@ -14,10 +23,16 @@ function NavBar({searchValue, setSearchValue, styleSearchValue, countrySearchVal
       </div>
       <div className="search-feature">
         <div className="Searchbar">
-          <SearchBar radiosRandom={radiosRandom} searchValue={searchValue} setSearchValue={setSearchValue} styleSearchValue={styleSearchValue} countrySearchValue={countrySearchValue}/>
+          <SearchBar
+            radiosRandom={radiosRandom}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+            styleSearchValue={styleSearchValue}
+            countrySearchValue={countrySearchValue}
+          />
         </div>
         <div className="container-filter">
-          <FilterButton/>
+          <FilterButton />
         </div>
       </div>
       <div className="logoRS">
@@ -33,5 +48,19 @@ function NavBar({searchValue, setSearchValue, styleSearchValue, countrySearchVal
     </div>
   );
 }
+
+NavBar.propTypes = {
+  searchValue: PropTypes.string.isRequired,
+  setSearchValue: PropTypes.func.isRequired,
+  styleSearchValue: PropTypes.func.isRequired,
+  countrySearchValue: PropTypes.func.isRequired,
+  radiosRandom: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    favicon: PropTypes.string.isRequired,
+    tags: PropTypes.string.isRequired,
+    country: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default NavBar;
