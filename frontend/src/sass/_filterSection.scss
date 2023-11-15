@@ -228,5 +228,16 @@
   display: flex;
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 425px) {
+  .filter-section {
+    width: 90%;
+    margin-top: 2.5%;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .filter-section {
+    width: 90%;
+    margin-top: 3%;
+  }
 }
