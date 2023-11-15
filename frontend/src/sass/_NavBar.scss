@@ -78,6 +78,15 @@
   height: 3.5rem;
 }
 
+@media screen and (min-width: 2559px) {
+  .container-logo {
+    .logoRW {
+      height: 50%;
+      width: 50%;
+    }
+  }
+}
+
 @media screen and (max-width: 768px) {
   .navbar {
     margin-bottom: 8px;
