@@ -90,7 +90,9 @@
 .icon {
   margin-top: 10px;
 }
+
 .weather-popup-overlay {
+  z-index: 100;
   position: fixed;
   top: 0;
   left: 0;
@@ -99,7 +101,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.5); /* Fond semi-transparent pour l'overlay */
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .weather-popup {
@@ -126,6 +128,7 @@
   font-size: 16px;
   color: #ffffff;
 }
+
 .open-button {
   display: flex;
   justify-content: center;
