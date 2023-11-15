@@ -11,6 +11,45 @@
   background-color: rgba(255, 255, 255, 0);
   border: none;
   z-index: 50;
+
+  .radio-selection {
+    display: flex;
+    justify-content: center;
+    border: 2px solid #dcdcdc;
+    border-radius: 4px;
+    background-color: #d3cdbb;
+    height: 60px;
+    width: 230px;
+    font-size: 2rem;
+    position: absolute;
+    bottom: 5%;
+    left: 37%;
+    overflow: scroll;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    text-justify: inter-word;
+
+    p {
+      animation: scroll-down-and-back-up 5s linear infinite;
+
+      @keyframes scroll-down-and-back-up {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-100%);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+
+  .radio-selection::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .int-content {

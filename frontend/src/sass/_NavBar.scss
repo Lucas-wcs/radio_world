@@ -10,11 +10,15 @@
 
   @keyframes slide-down {
     0% {
-      transform: translatey(-100%);
+      transform: translateY(-100%);
     }
     100% {
-      transform: translatey(0%);
+      transform: translateY(0%);
     }
+  }
+
+  .Searchbar {
+    height: 100%;
   }
 
   .favoriteButton {
@@ -139,10 +143,6 @@
         display: flex;
         justify-content: right;
         align-items: center;
-      }
-
-      img {
-        height: 80%;
       }
     }
   }

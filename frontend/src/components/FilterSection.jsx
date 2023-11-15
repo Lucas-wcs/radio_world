@@ -1,82 +1,107 @@
+/* eslint-disable no-nested-ternary */
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
+import getDataCountry from "../services/countryData";
+import getDataStyle from "../services/styleData";
 
 function FilterSection({
-  searchValue,
-  setSearchValue,
   setStyleSearchValue,
   setCountrySearchValue,
+  isVisible,
+  setIsVisible,
 }) {
   const [filterCriteriaButton, setFilterCriteriaButton] = useState(0);
+  const [isActive1, setIsActive1] = useState(null);
+  const [isActive2, setIsActive2] = useState(null);
+  const [inputValue1, setInputValue1] = useState("");
+  const [inputValue2, setInputValue2] = useState("");
   const [dataCountry, setDataCountry] = useState([]);
   const [dataStyle, setDataStyle] = useState([]);
 
-  function handleSearchBarChange(event) {
-    setSearchValue(event.target.value);
+  function getNoResultsMessage() {
+    return <p className="no-results">No results found.</p>;
   }
+  const noResultsMessage = getNoResultsMessage();
 
-  useEffect(() => {
-    axios
-      .get("https://de1.api.radio-browser.info/json/countries?order=name")
-      .then((response) => {
-        setDataCountry(response.data);
-      })
-      .catch((error) => console.error("Error fetching data: ", error));
-  }, []);
-  useEffect(() => {
-    axios
-      .get("https://de1.api.radio-browser.info/json/tags?order=stationcount")
-      .then((response) => {
-        setDataStyle(response.data);
-      })
-      .catch((error) => console.error("Error fetching data: ", error));
-  }, []);
-
-  function makeFilterSectionDisappear() {
-    const filterSection = document.querySelector(".filter-section");
-    filterSection.style.display = "none";
-  }
-
-  function handleFilterCriteriaActiveState(e) {
-    setFilterCriteriaButton(parseInt(e.target.value, 10));
-  }
-
-  function handleClickOnOptionButton(e) {
+  function handleInputChange(event) {
     if (filterCriteriaButton) {
-      setCountrySearchValue(e.target.textContent);
+      setInputValue1(event.target.value);
     } else {
-      setStyleSearchValue(e.target.textContent);
+      setInputValue2(event.target.value);
+    }
+  }
+
+  function handleClickOnCloseButton() {
+    if (isVisible) {
+      setIsVisible(0);
+    }
+  }
+
+  function handleFilterCriteriaActiveState(event) {
+    setFilterCriteriaButton(parseInt(event.target.value, 10));
+  }
+
+  function handleClickOnOptionButton(event) {
+    if (filterCriteriaButton) {
+      setCountrySearchValue(event.target.textContent);
+      setIsActive1(parseInt(event.target.value, 10));
+    } else {
+      setStyleSearchValue(event.target.textContent);
+      setIsActive2(parseInt(event.target.value, 10));
+    }
+  }
+
+  function handleClickOnCriteriaResetButton() {
+    if (filterCriteriaButton) {
+      setCountrySearchValue("");
+      setIsActive1(null);
+    } else {
+      setStyleSearchValue("");
+      setIsActive2(null);
     }
   }
 
   function handleClickOnResetButton() {
-    setSearchValue("");
     setCountrySearchValue("");
     setStyleSearchValue("");
+    setIsActive1(null);
+    setIsActive2(null);
   }
 
+  useEffect(() => {
+    getDataStyle()
+      .then((styleData) => setDataStyle(styleData))
+      .catch((error) => console.error(error));
+  }, []);
+
+  useEffect(() => {
+    getDataCountry()
+      .then((countryData) => setDataCountry(countryData))
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
-    <div className="filter-section">
+    <div className={`filter-section ${isVisible ? "is-visible" : ""}`}>
       <button
         type="button"
-        onClick={makeFilterSectionDisappear}
+        onClick={handleClickOnCloseButton}
         className="close-icon-wrapper"
+        value={isVisible}
       >
         <img src="/src/assets/closeIcon.svg" alt="Close icon" />
       </button>
       <div className="filter-criteria-wrapper">
         <button
-          onClick={handleFilterCriteriaActiveState}
           type="button"
-          value={0}
+          onClick={handleFilterCriteriaActiveState}
           className={`filter-criteria ${!filterCriteriaButton && "is-active"}`}
+          value={0}
         >
           Style
         </button>
         <button
-          onClick={handleFilterCriteriaActiveState}
           type="button"
+          onClick={handleFilterCriteriaActiveState}
           className={`filter-criteria ${filterCriteriaButton && "is-active"}`}
           value={1}
         >
@@ -87,40 +112,56 @@ function FilterSection({
         <input
           type="search"
           name="filter-section-search-bar"
-          placeholder="Search for criteria"
-          value={searchValue}
-          onChange={handleSearchBarChange}
+          placeholder={
+            filterCriteriaButton ? "Search for a country" : "Search for a style"
+          }
+          value={filterCriteriaButton ? inputValue1 : inputValue2}
+          onChange={handleInputChange}
         />
       </div>
       <div className="filter-options-wrapper">
-        {filterCriteriaButton
+        {!(filterCriteriaButton ? dataCountry : dataStyle).filter((element) =>
+          filterCriteriaButton
+            ? element.name.toLowerCase().startsWith(inputValue1.toLowerCase())
+            : element.name.toLowerCase().startsWith(inputValue2.toLowerCase())
+        ).length
+          ? noResultsMessage
+          : filterCriteriaButton
           ? dataCountry
               .filter((country) =>
-                country.name.toLowerCase().includes(searchValue.toLowerCase())
+                country.name.toLowerCase().startsWith(inputValue1.toLowerCase())
               )
               .map((country) => (
-                <div className="options">
+                <div key={dataCountry.indexOf(country)} className="options">
                   <button
                     onClick={handleClickOnOptionButton}
                     type="button"
-                    className="option"
+                    className={`option${
+                      isActive1 === dataCountry.indexOf(country)
+                        ? " is-active"
+                        : ""
+                    }`}
+                    value={dataCountry.indexOf(country)}
                   >
-                    <p key={country.name}>{country.name}</p>
+                    {country.name}
                   </button>
                 </div>
               ))
           : dataStyle
               .filter((tag) =>
-                tag.name.toLowerCase().includes(searchValue.toLowerCase())
+                tag.name.toLowerCase().startsWith(inputValue2.toLowerCase())
               )
               .map((tag) => (
-                <div className="options">
+                <div key={dataStyle.indexOf(tag)} className="options">
                   <button
                     onClick={handleClickOnOptionButton}
                     type="button"
-                    className="option"
+                    className={`option${
+                      isActive2 === dataStyle.indexOf(tag) ? " is-active" : ""
+                    }`}
+                    value={dataStyle.indexOf(tag)}
                   >
-                    <p key={tag.name}>{tag.name}</p>
+                    {tag.name}
                   </button>
                 </div>
               ))}
@@ -129,9 +170,16 @@ function FilterSection({
         <button
           type="button"
           className="reset-button"
+          onClick={handleClickOnCriteriaResetButton}
+        >
+          {filterCriteriaButton ? "Reset country filter" : "Reset style filter"}
+        </button>
+        <button
+          type="button"
+          className="reset-button"
           onClick={handleClickOnResetButton}
         >
-          Reset filters
+          Reset All filters
         </button>
       </div>
     </div>
@@ -141,8 +189,8 @@ function FilterSection({
 FilterSection.propTypes = {
   setStyleSearchValue: PropTypes.func.isRequired,
   setCountrySearchValue: PropTypes.func.isRequired,
-  setSearchValue: PropTypes.func.isRequired,
-  searchValue: PropTypes.string.isRequired,
+  isVisible: PropTypes.number.isRequired,
+  setIsVisible: PropTypes.func.isRequired,
 };
 
 export default FilterSection;

@@ -12,7 +12,7 @@ function SearchBar({ searchValue, setSearchValue }) {
           className="search-bar__input"
           type="search"
           name="search-bar"
-          placeholder="Search for a radio station by name"
+          placeholder="Search for a radio station name"
           value={searchValue}
           onChange={handleSearchBarChange}
         />
