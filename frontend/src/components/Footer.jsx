@@ -17,7 +17,7 @@ function Footer() {
         className="open-button"
         onClick={toggleWeatherPopup}
       >
-        Voir la météo
+        Voir la météo ☀️
       </button>
       {showWeatherPopup && (
         <div className="weather-popup-overlay">

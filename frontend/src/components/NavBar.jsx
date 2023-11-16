@@ -21,12 +21,6 @@ function NavBar({
           alt="Radio World logo"
         />
       </div>
-      {/* <img
-        src="src/images/heart.png"
-        className="favoriteButton"
-        alt="favoriteButton"
-      /> */}
-
       <div className="search-feature">
         <div className="Searchbar">
           <SearchBar
@@ -54,17 +48,6 @@ function NavBar({
 }
 
 NavBar.propTypes = {
-  searchValue: PropTypes.string.isRequired,
-  setSearchValue: PropTypes.func.isRequired,
-  radiosRandom: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-      favicon: PropTypes.string.isRequired,
-      tags: PropTypes.string.isRequired,
-      country: PropTypes.string.isRequired,
-    })
-  ).isRequired,
   isVisible: PropTypes.number.isRequired,
   setIsVisible: PropTypes.func.isRequired,
 };

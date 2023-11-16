@@ -38,13 +38,14 @@ function RadioPlayer({
         </div>
         <button
           type="button"
-          onClick={() => closeModal(false)}
+          onClick={() => {
+            closeModal(false);
+            toggleAudio();
+          }}
           className="button"
         >
           X
         </button>
-        {/* <img src={favicon}/>
-        <p>{name}</p> */}
         <div className="container-button">
           <div
             className="prevStation"
