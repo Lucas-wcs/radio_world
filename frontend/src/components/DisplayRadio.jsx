@@ -6,6 +6,7 @@ import FilterSection from "./FilterSection";
 
 function DisplayRadio({
   radiosRandom,
+  filteredRadio,
   toggleAudio,
   audioPlaying,
   playNextStation,
@@ -36,29 +37,13 @@ function DisplayRadio({
         setIsVisible={setIsVisible}
       />
       <div className={`display_radios ${!isLoading ? "loaded" : ""}`}>
-        {radiosRandom.filter(
-          (radio) =>
-            radio.name.toLowerCase().includes(searchValue.toLowerCase()) &&
-            radio.tags.toLowerCase().includes(styleSearchValue.toLowerCase()) &&
-            radio.country
-              .toLowerCase()
-              .includes(countrySearchValue.toLowerCase())
-        ).length === 0 ? (
-          <p className="no-results">No results found.</p>
+        {filteredRadio.length === 0 ? (
+          <p className="no-results">No results found</p>
         ) : (
-          radiosRandom &&
-          radiosRandom
-            .filter(
-              (radio) =>
-                radio.name.toLowerCase().includes(searchValue.toLowerCase()) &&
-                radio.tags
-                  .toLowerCase()
-                  .includes(styleSearchValue.toLowerCase()) &&
-                radio.country
-                  .toLowerCase()
-                  .includes(countrySearchValue.toLowerCase())
-            )
+          filteredRadio &&
+          filteredRadio
             .map((station, selectedCurrentStationIndex) => {
+              console.warn(radiosRandom)
               return (
                 <div className="space4" key={station.stationuuid}>
                   <div className="rond">
@@ -86,7 +71,7 @@ function DisplayRadio({
       {radiosRandom.length > 0 && openModal && (
         <RadioPlayer
           closeModal={setOpenModal}
-          stations={radiosRandom}
+          stations={filteredRadio}
           audioPlaying={audioPlaying}
           currentStationIndex={currentStationIndex}
           toggleAudio={toggleAudio}

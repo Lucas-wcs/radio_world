@@ -13,13 +13,26 @@ function App() {
   const [styleSearchValue, setStyleSearchValue] = useState("");
   const [countrySearchValue, setCountrySearchValue] = useState("");
   const [isVisible, setIsVisible] = useState(0);
+  const [filteredRadio, setFilteredRadio] = useState([]);
+
+  
+  useEffect(() => {
+    setFilteredRadio(
+      radiosRandom.filter(
+        (radio) =>
+          radio.name.toLowerCase().includes(searchValue.toLowerCase()) &&
+          radio.tags.toLowerCase().includes(styleSearchValue.toLowerCase()) &&
+          radio.country.toLowerCase().includes(countrySearchValue.toLowerCase())
+      )
+    );
+  }, [radiosRandom, searchValue, styleSearchValue, countrySearchValue]);
 
   useEffect(() => {
     axios
-      .get("https://de1.api.radio-browser.info/json/stations?limit=2000")
+      .get("https://de1.api.radio-browser.info/json/stations?limit=8000")
       .then((res) => {
         const tabRadios = [];
-        for (let i = 0; i < 500; i += 1) {
+        for (let i = 0; i < 1000; i += 1) {
           const randomRadio =
             res.data[Math.floor(Math.random() * res.data.length)];
           if (
@@ -113,6 +126,7 @@ function App() {
       <div>
         <DisplayRadio
           radiosRandom={radiosRandom}
+          filteredRadio={filteredRadio}
           toggleAudio={toggleAudio}
           audioPlaying={audioPlaying}
           currentStationIndex={currentStationIndex}
