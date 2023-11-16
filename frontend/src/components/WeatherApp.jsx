@@ -90,41 +90,43 @@ function WeatherApp() {
 
   return (
     <div className="container">
-      <div className="top-bar">
-        <input
-          type="text"
-          className="cityInput"
-          placeholder="Votre ville on Radio World"
-          onKeyDown={handleKeyDown}
-        />
-        <button
-          type="button"
-          className="search-icon"
-          onClick={() => {
-            search();
-          }}
-        >
-          <img src={searchIcon} alt="" />
-        </button>
-      </div>
-      <div className="weather-image">
-        <img src={wicon} alt="" />
-      </div>
-      <div className="weather-temp">24°</div>
-      <div className="weather-location">Nantes</div>
-      <div className="data-container">
-        <div className="element">
-          <img className="icon" src={humidityIcon} alt="" />
-          <div className="data">
-            <div className="humidity-percent">64%</div>
-            <div className="text">Humidity</div>
-          </div>
+      <div className="int-container">
+        <div className="top-bar">
+          <input
+            type="text"
+            className="cityInput"
+            placeholder="Votre ville on Radio World"
+            onKeyDown={handleKeyDown}
+          />
+          <button
+            type="button"
+            className="search-icon"
+            onClick={() => {
+              search();
+            }}
+          >
+            <img src={searchIcon} alt="" />
+          </button>
         </div>
-        <div className="element">
-          <img src={windIcon} alt="" className="icon" />
-          <div className="data">
-            <div className="wind-rate">6 km/h</div>
-            <div className="text">Wind speed</div>
+        <div className="weather-image">
+          <img src={wicon} alt="" />
+        </div>
+        <div className="weather-temp">24°</div>
+        <div className="weather-location">Nantes</div>
+        <div className="data-container">
+          <div className="element">
+            <img className="icon" src={humidityIcon} alt="" />
+            <div className="data">
+              <div className="humidity-percent">64%</div>
+              <div className="text">Humidity</div>
+            </div>
+          </div>
+          <div className="element">
+            <img src={windIcon} alt="" className="icon" />
+            <div className="data">
+              <div className="wind-rate">6 km/h</div>
+              <div className="text">Wind speed</div>
+            </div>
           </div>
         </div>
       </div>

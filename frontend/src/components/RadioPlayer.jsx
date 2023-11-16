@@ -75,6 +75,16 @@ function RadioPlayer({
           </div>
           <p>{currentStation.name}</p>
         </div>
+        <div className="container-url-radio">
+          <a
+            className="url-radio"
+            href={currentStation.homepage}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Découvre le site de la radio
+          </a>
+        </div>
       </div>
       {/* Lecteur audio caché */}
       <audio
@@ -95,6 +105,7 @@ RadioPlayer.propTypes = {
       url: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       favicon: PropTypes.string.isRequired,
+      homepage: PropTypes.string.isRequired,
     })
   ).isRequired,
   audioPlaying: PropTypes.bool.isRequired,
