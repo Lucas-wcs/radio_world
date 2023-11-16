@@ -111,20 +111,20 @@ function WeatherApp() {
         <div className="weather-image">
           <img src={wicon} alt="" />
         </div>
-        <div className="weather-temp">24°</div>
-        <div className="weather-location">Nantes</div>
+        <div className="weather-temp">...°</div>
+        <div className="weather-location">Indiquer votre ville</div>
         <div className="data-container">
           <div className="element">
             <img className="icon" src={humidityIcon} alt="" />
             <div className="data">
-              <div className="humidity-percent">64%</div>
+              <div className="humidity-percent">...%</div>
               <div className="text">Humidity</div>
             </div>
           </div>
           <div className="element">
             <img src={windIcon} alt="" className="icon" />
             <div className="data">
-              <div className="wind-rate">6 km/h</div>
+              <div className="wind-rate">... km/h</div>
               <div className="text">Wind speed</div>
             </div>
           </div>

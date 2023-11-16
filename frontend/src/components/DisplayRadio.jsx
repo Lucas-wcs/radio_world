@@ -5,7 +5,7 @@ import FilterSection from "./FilterSection";
 // import Favorite from "./Favorite";
 
 function DisplayRadio({
-  radiosRandom,
+  filteredRadio,
   toggleAudio,
   audioPlaying,
   playNextStation,
@@ -36,57 +36,39 @@ function DisplayRadio({
         setIsVisible={setIsVisible}
       />
       <div className={`display_radios ${!isLoading ? "loaded" : ""}`}>
-        {radiosRandom.filter(
-          (radio) =>
-            radio.name.toLowerCase().includes(searchValue.toLowerCase()) &&
-            radio.tags.toLowerCase().includes(styleSearchValue.toLowerCase()) &&
-            radio.country
-              .toLowerCase()
-              .includes(countrySearchValue.toLowerCase())
-        ).length === 0 ? (
-          <p className="no-results">No results found.</p>
+        {filteredRadio.length === 0 ? (
+          <p className="no-results">No results found</p>
         ) : (
-          radiosRandom &&
-          radiosRandom
-            .filter(
-              (radio) =>
-                radio.name.toLowerCase().includes(searchValue.toLowerCase()) &&
-                radio.tags
-                  .toLowerCase()
-                  .includes(styleSearchValue.toLowerCase()) &&
-                radio.country
-                  .toLowerCase()
-                  .includes(countrySearchValue.toLowerCase())
-            )
-            .map((station, selectedCurrentStationIndex) => {
-              return (
-                <div className="space4" key={station.stationuuid}>
-                  <div className="rond">
-                    <button
-                      onClick={() => {
-                        setOpenModal(true);
-                        setCurrentStationIndex(selectedCurrentStationIndex);
-                      }}
-                      type="button"
-                      className="radio"
-                    >
-                      <img
-                        src={station.favicon}
-                        alt="favicon"
-                        className="favicon"
-                      />
-                      <p>{station.name}</p>
-                    </button>
-                  </div>
+          filteredRadio &&
+          filteredRadio.map((station, selectedCurrentStationIndex) => {
+            return (
+              <div className="space4" key={station.stationuuid}>
+                <div className="rond">
+                  <button
+                    onClick={() => {
+                      setOpenModal(true);
+                      setCurrentStationIndex(selectedCurrentStationIndex);
+                    }}
+                    type="button"
+                    className="radio"
+                  >
+                    <img
+                      src={station.favicon}
+                      alt="favicon"
+                      className="favicon"
+                    />
+                    <p>{station.name}</p>
+                  </button>
                 </div>
-              );
-            })
+              </div>
+            );
+          })
         )}
       </div>
-      {radiosRandom.length > 0 && openModal && (
+      {filteredRadio.length > 0 && openModal && (
         <RadioPlayer
           closeModal={setOpenModal}
-          stations={radiosRandom}
+          stations={filteredRadio}
           audioPlaying={audioPlaying}
           currentStationIndex={currentStationIndex}
           toggleAudio={toggleAudio}
@@ -99,15 +81,7 @@ function DisplayRadio({
 }
 
 DisplayRadio.propTypes = {
-  radiosRandom: PropTypes.arrayOf(
-    PropTypes.shape({
-      stationuuid: PropTypes.string.isRequired,
-      favicon: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      tags: PropTypes.string.isRequired,
-      country: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  filteredRadio: PropTypes.func.isRequired,
   audioPlaying: PropTypes.bool.isRequired,
   currentStationIndex: PropTypes.number.isRequired,
   toggleAudio: PropTypes.func.isRequired,
