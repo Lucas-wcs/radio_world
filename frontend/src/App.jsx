@@ -15,7 +15,6 @@ function App() {
   const [isVisible, setIsVisible] = useState(0);
   const [filteredRadio, setFilteredRadio] = useState([]);
 
-  
   useEffect(() => {
     setFilteredRadio(
       radiosRandom.filter(
@@ -58,6 +57,7 @@ function App() {
           }
         }
         setRadiosRandom(tabRadios);
+        setFilteredRadio(tabRadios);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -74,7 +74,7 @@ function App() {
   };
 
   const playNextStation = () => {
-    if (currentStationIndex < radiosRandom.length - 1) {
+    if (currentStationIndex < filteredRadio.length - 1) {
       setCurrentStationIndex(currentStationIndex + 1);
     } else {
       setCurrentStationIndex(0);
@@ -86,7 +86,7 @@ function App() {
     if (currentStationIndex > 0) {
       setCurrentStationIndex(currentStationIndex - 1);
     } else {
-      setCurrentStationIndex(radiosRandom.length - 1);
+      setCurrentStationIndex(filteredRadio.length - 1);
     }
     setAudioPlaying(true);
   };
@@ -94,7 +94,7 @@ function App() {
   useEffect(() => {
     const audioElement = document.getElementById("audioPlayer");
     if (audioElement) {
-      audioElement.src = radiosRandom[currentStationIndex].url;
+      audioElement.src = filteredRadio[currentStationIndex].url;
       audioElement.addEventListener("canplay", () => {
         if (audioPlaying) {
           audioElement.play();
