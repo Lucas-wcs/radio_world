@@ -12,13 +12,26 @@ function App() {
   const [searchValue, setSearchValue] = useState("");
   const [styleSearchValue, setStyleSearchValue] = useState("");
   const [countrySearchValue, setCountrySearchValue] = useState("");
+  const [isVisible, setIsVisible] = useState(0);
+  const [filteredRadio, setFilteredRadio] = useState([]);
+
+  useEffect(() => {
+    setFilteredRadio(
+      radiosRandom.filter(
+        (radio) =>
+          radio.name.toLowerCase().includes(searchValue.toLowerCase()) &&
+          radio.tags.toLowerCase().includes(styleSearchValue.toLowerCase()) &&
+          radio.country.toLowerCase().includes(countrySearchValue.toLowerCase())
+      )
+    );
+  }, [radiosRandom, searchValue, styleSearchValue, countrySearchValue]);
 
   useEffect(() => {
     axios
-      .get("https://de1.api.radio-browser.info/json/stations?limit=2500")
+      .get("https://de1.api.radio-browser.info/json/stations?limit=8000")
       .then((res) => {
         const tabRadios = [];
-        for (let i = 0; i < 200; i += 1) {
+        for (let i = 0; i < 1000; i += 1) {
           const randomRadio =
             res.data[Math.floor(Math.random() * res.data.length)];
           if (
@@ -44,6 +57,7 @@ function App() {
           }
         }
         setRadiosRandom(tabRadios);
+        setFilteredRadio(tabRadios);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -60,7 +74,7 @@ function App() {
   };
 
   const playNextStation = () => {
-    if (currentStationIndex < radiosRandom.length - 1) {
+    if (currentStationIndex < filteredRadio.length - 1) {
       setCurrentStationIndex(currentStationIndex + 1);
     } else {
       setCurrentStationIndex(0);
@@ -72,7 +86,7 @@ function App() {
     if (currentStationIndex > 0) {
       setCurrentStationIndex(currentStationIndex - 1);
     } else {
-      setCurrentStationIndex(radiosRandom.length - 1);
+      setCurrentStationIndex(filteredRadio.length - 1);
     }
     setAudioPlaying(true);
   };
@@ -80,7 +94,7 @@ function App() {
   useEffect(() => {
     const audioElement = document.getElementById("audioPlayer");
     if (audioElement) {
-      audioElement.src = radiosRandom[currentStationIndex].url;
+      audioElement.src = filteredRadio[currentStationIndex].url;
       audioElement.addEventListener("canplay", () => {
         if (audioPlaying) {
           audioElement.play();
@@ -93,7 +107,13 @@ function App() {
 
   return (
     <div className="main">
-      <NavBar  setSearchValue={setSearchValue} setStyleSearchValue={setStyleSearchValue} setCountrySearchValue={setCountrySearchValue}/>
+      <NavBar
+        setSearchValue={setSearchValue}
+        setStyleSearchValue={setStyleSearchValue}
+        setCountrySearchValue={setCountrySearchValue}
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
+      />
       {isLoading && (
         <div className="container-loading-logo">
           <img
@@ -106,6 +126,7 @@ function App() {
       <div>
         <DisplayRadio
           radiosRandom={radiosRandom}
+          filteredRadio={filteredRadio}
           toggleAudio={toggleAudio}
           audioPlaying={audioPlaying}
           currentStationIndex={currentStationIndex}
@@ -113,13 +134,14 @@ function App() {
           playNextStation={playNextStation}
           setCurrentStationIndex={setCurrentStationIndex}
           isLoading={isLoading}
-          searchValue={searchValue}  
-          styleSearchValue={styleSearchValue} 
+          searchValue={searchValue}
+          styleSearchValue={styleSearchValue}
           countrySearchValue={countrySearchValue}
-          setSearchValue={setSearchValue} 
-          setStyleSearchValue={setStyleSearchValue} 
-          setCountrySearchValue={setCountrySearchValue} 
-          
+          setSearchValue={setSearchValue}
+          setStyleSearchValue={setStyleSearchValue}
+          setCountrySearchValue={setCountrySearchValue}
+          isVisible={isVisible}
+          setIsVisible={setIsVisible}
         />
       </div>
       <Footer />

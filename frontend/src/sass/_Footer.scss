@@ -11,3 +11,14 @@
   padding-bottom: 5px;
   padding-left: 5%;
 }
+
+@media screen and (max-width: 425px) {
+  .footer {
+    .open-button {
+      display: none;
+    }
+    .weather-popup-overlay {
+      display: none;
+    }
+  }
+}

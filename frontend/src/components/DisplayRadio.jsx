@@ -5,7 +5,7 @@ import FilterSection from "./FilterSection";
 // import Favorite from "./Favorite";
 
 function DisplayRadio({
-  radiosRandom,
+  filteredRadio,
   toggleAudio,
   audioPlaying,
   playNextStation,
@@ -18,11 +18,11 @@ function DisplayRadio({
   styleSearchValue,
   setStyleSearchValue,
   countrySearchValue,
-  setCountrySearchValue
+  setCountrySearchValue,
+  isVisible,
+  setIsVisible,
 }) {
-  
   const [openModal, setOpenModal] = useState(false);
-  // const [favoriteRadiosRandom, setFavoriteRadiosRandom] = useState([]);
   return (
     <div className="container-display-radio">
       <FilterSection
@@ -32,55 +32,43 @@ function DisplayRadio({
         setCountrySearchValue={setCountrySearchValue}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
       />
       <div className={`display_radios ${!isLoading ? "loaded" : ""}`}>
-        {radiosRandom &&
-          radiosRandom
-            .filter(
-              (radio) =>
-                radio.name.toLowerCase().includes(searchValue.toLowerCase()) &&
-                radio.tags
-                  .toLowerCase()
-                  .includes(styleSearchValue.toLowerCase()) &&
-                radio.country
-                  .toLowerCase()
-                  .includes(countrySearchValue.toLowerCase())
-            )
-            .map((station, selectedCurrentStationIndex) => {
-              return (
-                <div className="space4" key={station.stationuuid}>
-                  <div className="rond">
-                    {/* <Favorite
-                      radiosRandom={radiosRandom}
-                      favoriteRadiosRandom={favoriteRadiosRandom}
-                      setFavoriteRadiosRandom={setFavoriteRadiosRandom}
-                      setCurrentStationIndex={setCurrentStationIndex}
-                      selectedCurrentStationIndex={selectedCurrentStationIndex}
-                    /> */}
-                    <button
-                      onClick={() => {
-                        setOpenModal(true);
-                        setCurrentStationIndex(selectedCurrentStationIndex);
-                      }}
-                      type="button"
-                      className="radio"
-                    >
-                      <img
-                        src={station.favicon}
-                        alt="favicon"
-                        className="favicon"
-                      />
-                      <p>{station.name}</p>
-                    </button>
-                  </div>
+        {filteredRadio.length === 0 ? (
+          <p className="no-results">No results found</p>
+        ) : (
+          filteredRadio &&
+          filteredRadio.map((station, selectedCurrentStationIndex) => {
+            return (
+              <div className="space4" key={station.stationuuid}>
+                <div className="rond">
+                  <button
+                    onClick={() => {
+                      setOpenModal(true);
+                      setCurrentStationIndex(selectedCurrentStationIndex);
+                    }}
+                    type="button"
+                    className="radio"
+                  >
+                    <img
+                      src={station.favicon}
+                      alt="favicon"
+                      className="favicon"
+                    />
+                    <p>{station.name}</p>
+                  </button>
                 </div>
-              );
-            })}
+              </div>
+            );
+          })
+        )}
       </div>
-      {radiosRandom.length > 0 && openModal && (
+      {filteredRadio.length > 0 && openModal && (
         <RadioPlayer
           closeModal={setOpenModal}
-          stations={radiosRandom}
+          stations={filteredRadio}
           audioPlaying={audioPlaying}
           currentStationIndex={currentStationIndex}
           toggleAudio={toggleAudio}
@@ -93,15 +81,7 @@ function DisplayRadio({
 }
 
 DisplayRadio.propTypes = {
-  radiosRandom: PropTypes.arrayOf(
-    PropTypes.shape({
-      stationuuid: PropTypes.string.isRequired,
-      favicon: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      tags: PropTypes.string.isRequired,
-      country: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  filteredRadio: PropTypes.func.isRequired,
   audioPlaying: PropTypes.bool.isRequired,
   currentStationIndex: PropTypes.number.isRequired,
   toggleAudio: PropTypes.func.isRequired,
@@ -109,6 +89,14 @@ DisplayRadio.propTypes = {
   playPreviousStation: PropTypes.func.isRequired,
   setCurrentStationIndex: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  searchValue: PropTypes.string.isRequired,
+  setSearchValue: PropTypes.func.isRequired,
+  styleSearchValue: PropTypes.string.isRequired,
+  setStyleSearchValue: PropTypes.func.isRequired,
+  countrySearchValue: PropTypes.string.isRequired,
+  setCountrySearchValue: PropTypes.func.isRequired,
+  isVisible: PropTypes.number.isRequired,
+  setIsVisible: PropTypes.func.isRequired,
 };
 
 export default DisplayRadio;

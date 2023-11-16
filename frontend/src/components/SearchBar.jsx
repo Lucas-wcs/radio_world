@@ -7,12 +7,12 @@ function SearchBar({ searchValue, setSearchValue }) {
 
   return (
     <div className="container-search-bar">
-      <div className="search-bar">       
+      <div className="search-bar">
         <input
           className="search-bar__input"
           type="search"
           name="search-bar"
-          placeholder="Search for a radio station by name"
+          placeholder="Search for a radio station name"
           value={searchValue}
           onChange={handleSearchBarChange}
         />
@@ -20,10 +20,5 @@ function SearchBar({ searchValue, setSearchValue }) {
     </div>
   );
 }
-
-SearchBar.propTypes = {
-  searchValue: PropTypes.string.isRequired,
-  setSearchValue: PropTypes.func.isRequired,
-};
 
 export default SearchBar;

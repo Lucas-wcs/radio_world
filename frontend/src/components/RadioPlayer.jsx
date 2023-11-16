@@ -11,6 +11,8 @@ function RadioPlayer({
   playPreviousStation,
   closeModal,
 }) {
+  const currentStation = stations[currentStationIndex];
+
   return (
     <div type="button" className="container-radio">
       <div type="button" className="int-content">
@@ -36,13 +38,14 @@ function RadioPlayer({
         </div>
         <button
           type="button"
-          onClick={() => closeModal(false)}
+          onClick={() => {
+            closeModal(false);
+            toggleAudio();
+          }}
           className="button"
         >
           X
         </button>
-        {/* <img src={favicon}/>
-        <p>{name}</p> */}
         <div className="container-button">
           <div
             className="prevStation"
@@ -67,6 +70,22 @@ function RadioPlayer({
             <img src="/suivant.png" alt="suivant" />
           </div>
         </div>
+        <div className="radio-selection">
+          <div className="radio-selection-favicon">
+            <img src={currentStation.favicon} alt="favicon" />
+          </div>
+          <p>{currentStation.name}</p>
+        </div>
+        <div className="container-url-radio">
+          <a
+            className="url-radio"
+            href={currentStation.homepage}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Découvre le site de la radio
+          </a>
+        </div>
       </div>
       {/* Lecteur audio caché */}
       <audio
@@ -83,7 +102,12 @@ function RadioPlayer({
 
 RadioPlayer.propTypes = {
   stations: PropTypes.arrayOf(
-    PropTypes.shape({ url: PropTypes.string.isRequired })
+    PropTypes.shape({
+      url: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      favicon: PropTypes.string.isRequired,
+      homepage: PropTypes.string.isRequired,
+    })
   ).isRequired,
   audioPlaying: PropTypes.bool.isRequired,
   currentStationIndex: PropTypes.number.isRequired,
