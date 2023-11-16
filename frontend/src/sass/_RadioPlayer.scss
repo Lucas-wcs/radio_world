@@ -50,12 +50,18 @@
 }
 .container-url-radio {
   text-align: center;
-  padding: 5px;
+  margin-top: 3%;
   a {
     font-size: 20px;
     text-decoration: none;
-    color: black;
+    color: white;
     cursor: pointer;
+    background-color: var(--secondary-color);
+    padding: 8px;
+    border-radius: 1rem;
+  }
+  &:hover{
+    filter:brightness(1.2);
   }
 }
 .radio-selection::-webkit-scrollbar {

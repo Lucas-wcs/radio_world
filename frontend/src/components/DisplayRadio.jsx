@@ -23,7 +23,6 @@ function DisplayRadio({
   setIsVisible,
 }) {
   const [openModal, setOpenModal] = useState(false);
-  // const [favoriteRadiosRandom, setFavoriteRadiosRandom] = useState([]);
   return (
     <div className="container-display-radio">
       <FilterSection
@@ -63,13 +62,6 @@ function DisplayRadio({
               return (
                 <div className="space4" key={station.stationuuid}>
                   <div className="rond">
-                    {/* <Favorite
-                      radiosRandom={radiosRandom}
-                      favoriteRadiosRandom={favoriteRadiosRandom}
-                      setFavoriteRadiosRandom={setFavoriteRadiosRandom}
-                      setCurrentStationIndex={setCurrentStationIndex}
-                      selectedCurrentStationIndex={selectedCurrentStationIndex}
-                    /> */}
                     <button
                       onClick={() => {
                         setOpenModal(true);

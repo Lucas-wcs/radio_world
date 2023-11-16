@@ -21,9 +21,4 @@ function SearchBar({ searchValue, setSearchValue }) {
   );
 }
 
-SearchBar.propTypes = {
-  searchValue: PropTypes.string.isRequired,
-  setSearchValue: PropTypes.func.isRequired,
-};
-
 export default SearchBar;
