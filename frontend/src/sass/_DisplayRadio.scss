@@ -64,14 +64,15 @@
       6px 6px 12px #fae7a75b,
       -6px -6px 12px #fae7a75b;
     cursor: pointer;
-    transition: background-color 1s,
-    width  0.1s,
-    height  0.1s;
+    transition:
+      background-color 1s,
+      width 0.1s,
+      height 0.1s;
 
-    &:hover{
+    &:hover {
       background-color: hsla(45, 69%, 90%, 0.737);
-      width : 97%;
-      height:97%; 
+      width: 97%;
+      height: 97%;
     }
   }
 
@@ -186,7 +187,7 @@
 @media screen and (max-width: 425px) {
   .container-display-radio {
     .display_radios.loaded {
-      height: 67.5vh;
+      height: 68.8vh;
       width: 100vw;
     }
     .display_radios {
@@ -213,7 +214,7 @@
   @media screen and (max-width: 375px) {
     .container-display-radio {
       .display_radios.loaded {
-        height: 67.4vh;
+        height: 69vh;
         width: 100vw;
       }
       .display_radios {
