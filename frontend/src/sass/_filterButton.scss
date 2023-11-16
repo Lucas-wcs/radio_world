@@ -12,8 +12,8 @@
   color: var(--neutral-color);
   cursor: pointer; //TODO: keep this declaration for desktop version
 
-  &:hover{
-    filter:brightness(1.2);
+  &:hover {
+    filter: brightness(1.2);
   }
 
   img {
@@ -24,6 +24,6 @@
 
 @media screen and (max-width: 425px) {
   .filter-button {
-    height: 85%;
+    height: 95%;
   }
 }
