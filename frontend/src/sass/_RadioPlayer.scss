@@ -294,3 +294,25 @@
     gap: 30px;
   }
 }
+.container-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 16%;
+  gap: 30px;
+
+  img {
+    width: 80px;
+    padding: 5px;
+    cursor: pointer;
+    filter: drop-shadow(0px 2px 2px black);
+  }
+
+  img:hover {
+    transform: scale(1.1);
+  }
+}
