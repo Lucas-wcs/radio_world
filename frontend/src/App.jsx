@@ -31,7 +31,7 @@ function App() {
       .get("https://de1.api.radio-browser.info/json/stations?limit=8000")
       .then((res) => {
         const tabRadios = [];
-        for (let i = 0; i < 1000; i += 1) {
+        for (let i = 0; i < 500; i += 1) {
           const randomRadio =
             res.data[Math.floor(Math.random() * res.data.length)];
           if (
@@ -116,11 +116,7 @@ function App() {
       />
       {isLoading && (
         <div className="container-loading-logo">
-          <img
-            src="public\Radio_World.png"
-            alt="logo"
-            className="loadingLogo"
-          />
+          <img src="/Radio_World.png" alt="logo" className="loadingLogo" />
         </div>
       )}
       <div>
