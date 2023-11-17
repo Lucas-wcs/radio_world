@@ -6,7 +6,7 @@
     opacity: 1;
     transition: opacity 1s;
     overflow: auto;
-    height: 71%;
+    height: calc(71% + 8px);
     padding-top: 80px;
     position: absolute;
     z-index: 50;
