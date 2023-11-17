@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import searchIcon from "../assets/search.png";
 import clearIcon from "../assets/clear.png";
 import cloudIcon from "../assets/cloud.png";

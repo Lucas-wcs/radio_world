@@ -19,7 +19,7 @@ function RadioPlayer({
         <div className="container-animation">
           <div className="animation">
             <img
-              src="./Cassette.png"
+              src="/Cassette.png"
               alt="Cassette"
               className="c1"
               style={{
@@ -27,7 +27,7 @@ function RadioPlayer({
               }}
             />
             <img
-              src="./Cassette2.png"
+              src="/Cassette2.png"
               alt="Cassette2"
               className="c2"
               style={{

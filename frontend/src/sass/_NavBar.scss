@@ -1,6 +1,6 @@
 .navbar {
   display: flex;
-  height: 13vh;
+  height: 14%;
   justify-content: space-around;
   align-items: center;
   background-color: #c34e3a;
@@ -110,33 +110,29 @@
   }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 426px) {
   .container-logo {
-    margin-right: 14%;
+    margin-right: 10%;
     flex: 1;
     display: flex;
     justify-content: right;
 
     .logoRW {
-      height: 52%;
-      width: 52%;
+      height: 40%;
+      width: 40%;
     }
   }
   .navbar {
-    margin-bottom: 41px;
+    justify-content: space-between;
 
     .search-feature {
       padding-left: 0px;
-      padding-top: 1.6px;
-      margin-top: 36%;
-      width: 100%;
       display: flex;
       justify-content: center;
-      position: absolute;
-      background-color: rgba(255, 255, 255, 0.425);
-      z-index: -50;
+      padding-right: 2%;
     }
     .logoRS {
+      display: none;
       flex-direction: column;
       justify-content: center;
       padding-right: 0px;
@@ -159,23 +155,13 @@
 
 @media screen and (max-width: 375px) {
   .container-logo {
-    margin-right: 9%;
+    margin-right: 10%;
     flex: 1;
     display: flex;
-    justify-content: right;
 
     .logoRW {
-      height: 57%;
-      width: 57%;
-    }
-  }
-
-  .navbar {
-    margin-bottom: 41px;
-
-    .search-feature {
-      margin-top: 41%;
-      padding-top: 2px;
+      height: 45%;
+      width: 45%;
     }
   }
 }

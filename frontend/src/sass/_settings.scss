@@ -11,7 +11,7 @@
 }
 
 body {
-  background-image: url("src/images/fond_radio_2.png");
+  background-image: url("/fond_radio_2.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -34,9 +34,9 @@ body {
   height: 100vh;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 426px) {
   body {
-    background-image: url("./Micro.png");
+    background-image: url("/Micro.png");
     background-size: 75%;
     background-color: #f5ab50c5;
   }

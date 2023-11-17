@@ -1,4 +1,4 @@
-/* eslint-disable import/order */
+/* eslint-disable react/prop-types */
 
 import React from "react";
 import PropTypes from "prop-types";
@@ -15,11 +15,7 @@ function NavBar({
   return (
     <div className="navbar">
       <div className="container-logo">
-        <img
-          src="src/images/Radio_World.png"
-          className="logoRW"
-          alt="Radio World logo"
-        />
+        <img src="/Radio_World.png" className="logoRW" alt="Radio World logo" />
       </div>
       <div className="search-feature">
         <div className="Searchbar">
