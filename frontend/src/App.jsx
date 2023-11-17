@@ -40,7 +40,8 @@ function App() {
             randomRadio.stationuuid !== "" &&
             randomRadio.tags !== "" &&
             randomRadio.country !== "" &&
-            randomRadio.codec === "MP3"
+            randomRadio.codec === "MP3" &&
+            randomRadio.url.includes("https") === true
           ) {
             const verifName = randomRadio.name;
             const verifUUID = randomRadio.stationuuid;
