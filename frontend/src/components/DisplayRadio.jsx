@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import RadioPlayer from "./RadioPlayer";
@@ -81,7 +82,6 @@ function DisplayRadio({
 }
 
 DisplayRadio.propTypes = {
-  filteredRadio: PropTypes.func.isRequired,
   audioPlaying: PropTypes.bool.isRequired,
   currentStationIndex: PropTypes.number.isRequired,
   toggleAudio: PropTypes.func.isRequired,

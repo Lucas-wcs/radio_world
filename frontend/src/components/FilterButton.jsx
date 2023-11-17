@@ -15,7 +15,7 @@ function FilterButton({ isVisible, setIsVisible }) {
       value={isVisible}
     >
       Filter
-      <img src="/src/assets/filterIcon.png" alt="Filter icon" />
+      <img src="/filterIcon.png" alt="Filter icon" />
     </button>
   );
 }

@@ -54,10 +54,11 @@
   }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 426px) {
   .container-search-bar {
     padding-left: 0px;
     width: 75%;
+    display: none;
     .search-bar__input {
       height: 80%;
     }

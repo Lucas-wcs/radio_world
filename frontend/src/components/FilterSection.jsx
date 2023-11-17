@@ -88,7 +88,7 @@ function FilterSection({
         className="close-icon-wrapper"
         value={isVisible}
       >
-        <img src="/src/assets/closeIcon.svg" alt="Close icon" />
+        <img src="/closeIcon.png" alt="Close icon" />
       </button>
       <div className="filter-criteria-wrapper">
         <button
